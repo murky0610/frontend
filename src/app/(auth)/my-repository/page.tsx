@@ -12,19 +12,19 @@ import { Separator } from "@/components/ui/separator";
 import { RepositoryInterface } from "@/interface/repository.interface";
 import ModalEditRepository from "@/components/modal/ModalEditRepostory";
 import RepositoryFilterSearch from "@/components/RepositoryFilterSearch";
-const categoryIcons = {
+const categoryIcons = { //required only one
   "Policy Brief": Scale,
   "Paper": BookOpen,
   "Research Project": GraduationCap,
 };
 
-const focusIcons = {
+const focusIcons = { //non required but many
   "Clustering": Boxes,
   "Value Adding": HandCoins,
   "Technology": Cpu,
 };
 
-const commodityIcons = {
+const commodityIcons = {//non required but many
   "Cacao": Bean,
   "Coffee": Coffee,
   "Cavendish Banana": Banana,
@@ -65,7 +65,7 @@ export default function MyRepositories() {
       <div className="flex flex-col">
       <div className="flex items-center justify-between max-w-screen p-5">
       <h1 className="text-2xl font-bold">My Repositories</h1>
-      <Button onClick={() => setOpen(true)}>Add Repository</Button>
+      <Button onClick={() => setOpen(true)}>Add Entry</Button>
     </div>
         {error ? (
           <p className="text-red-500">{error}</p> 
