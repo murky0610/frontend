@@ -71,7 +71,7 @@ export default function ExampleComponent() {
     <CardHeader>
       <CardTitle className='font-semibold text-2xl'>Project 1</CardTitle>
       <CardDescription className='font-semibold text-xl'>
-        Value Chain Analysis and Development: Cacao, Coffee, and Cavendish Banana
+       Value Chain Analysis and Development: Cacao, Coffee, and Cavendish Banana
       </CardDescription>
     </CardHeader>
 
