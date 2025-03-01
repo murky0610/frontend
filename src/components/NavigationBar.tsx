@@ -1,94 +1,130 @@
 "use client"
-import { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
 
-const navLinks = [
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
-  { href: "/partnerships", label: "Partnership & Linkages" },
-];
+import * as React from "react"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { Icons } from "@/components/icons"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+import { Button } from "./ui/button"
+import Image from "next/image"
+import { Label } from "./ui/label"
+const components = [
+  { title: "What We Do", href: "/docs/primitives/alert-dialog" },
+  { title: "Who We Are", href: "/docs/primitives/hover-card" },
+  { title: "Our Collaborators", href: "/docs/primitives/progress" },
+  { title: "Our Projects", href: "/docs/primitives/scroll-area" },
+]
 
-export default function NavigationBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+const features = [
+  { title: "Cost Calculator", href: "/docs/primitives/alert-dialog" },
+  { title: "MPO", href: "/docs/primitives/hover-card" },
+]
 
+export default function NavigationMenuDemo() {
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-black">
-            AAVC
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-black hover:text-gray-600 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Login & Sign Up Buttons (Aligned Inline) */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link href="/login" className="text-black hover:text-gray-600 transition-colors">
-              Log in
+    <div className="w-full flex items-center justify-between px-4">
+      {/* Logo on the left */}
+      <Link href="/home">
+      <Image
+        src="/VC Lab Logo PNG.png"
+        alt="AAVC Logo"
+        width={400}
+        height={200}
+        className="object-cover"
+      />
+      </Link>
+      {/* <Label>
+        AAVCLAB
+      </Label> */}
+      
+      {/* Navigation Menu in the center */}
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>About Us</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[300px]">
+                {components.map((component) => (
+                  <ListItem
+                    key={component.title}
+                    title={component.title}
+                    href={component.href}
+                  />
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[300px]">
+                {features.map((feature) => (
+                  <ListItem
+                    key={feature.title}
+                    title={feature.title}
+                    href={feature.href}
+                  />
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/prejects" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Projects
+              </NavigationMenuLink>
             </Link>
-            <Link href="/signup">
-              <Button className="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800">
-                Sign up
-              </Button>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/docs" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Contact Us
+              </NavigationMenuLink>
             </Link>
-          </div>
+          </NavigationMenuItem>
+      
+        </NavigationMenuList>
+      </NavigationMenu>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
-              {isMenuOpen ? <X className="text-black" /> : <Menu className="text-black" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-4 py-3 space-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block text-black text-lg py-2 hover:text-gray-600"
-                  onClick={toggleMenu}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="flex flex-col space-y-2">
-                <Link
-                  href="/login"
-                  className="text-black text-lg py-2 hover:text-gray-600"
-                  onClick={toggleMenu}
-                >
-                  Log in
-                </Link>
-                <Link href="/signup">
-                  <Button className="w-full bg-black text-white py-2 rounded-full hover:bg-gray-800">
-                    Sign up
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
+      {/* Login/Signup buttons on the right */}
+      <div className="flex gap-2">
+        <Button variant="outline">Login</Button>
+        <Button>Sign Up</Button>
       </div>
-    </nav>
-  );
+    </div>
+  )
 }
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = "ListItem"
