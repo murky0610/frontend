@@ -59,8 +59,8 @@ export default function DashboardPage() {
   })
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center ">
-      <Card className="w-full max-w-4xl shadow-lg rounded-lg">
+       <div className="flex items-center max-w-screen-lg p-5 bg">
+      <Card className="w-full shadow-lg rounded-lg">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 text-center sm:text-left">
           <CardTitle>Area Chart - Interactive</CardTitle>
