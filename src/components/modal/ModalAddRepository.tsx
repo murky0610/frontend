@@ -38,11 +38,9 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
-import { RepositoryInterface } from "@/interface/repository.interface";
 import { addRepositorySchema, AddRepositoryType } from "@/schema/addrepository.schema";
-import { addMyRepository } from "@/app/endpoint/api";
+import { addMyRepository } from "@/api/api";
 import { toast } from "sonner"
 interface ModalAddRepositoryProps {
   open: boolean;

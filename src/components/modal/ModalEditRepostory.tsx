@@ -41,7 +41,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RepositoryInterface } from "@/interface/repository.interface";
-import { editMyRepository } from "@/app/endpoint/api";
+import { editMyRepository } from "@/api/api";
 import { AddRepositoryType, addRepositorySchema } from "@/schema/addrepository.schema";
 
 import { toast } from "sonner"
