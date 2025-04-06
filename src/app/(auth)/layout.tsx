@@ -1,12 +1,17 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/AppSideBar"
+import { AppSidebar } from "@/components/client/AppSideBar"
 import { Toaster } from "@/components/ui/sonner";
+import NavigationBarAuth from "@/components/client/NavigationBarAuth";
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
+  
       <main>
-        <SidebarTrigger />
+
+        <NavigationBarAuth/>
+          
+        {/* <SidebarTrigger /> */}
         {children}
       </main>
       <Toaster/>
