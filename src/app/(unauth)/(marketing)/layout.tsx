@@ -1,5 +1,5 @@
 
-import NavigationBar from "@/components/NavigationBar";
+import NavigationBar from "@/components/client/NavigationBar";
 import { Toaster } from "@/components/ui/sonner";
 export default function CredentialLayout({
   children,
@@ -7,16 +7,11 @@ export default function CredentialLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-      
-       
-      >   
+  <>
        <NavigationBar />
          
         {children}
         <Toaster/>
-      </body>
-    </html>
+</>
   );
 }
