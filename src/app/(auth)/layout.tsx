@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/client/AppSideBar"
 import { Toaster } from "@/components/ui/sonner";
 import NavigationBarAuth from "@/components/client/NavigationBarAuth";
