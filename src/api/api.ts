@@ -99,10 +99,10 @@ export const editMyRepository = async (id: number, repository: Partial<Repositor
 };
 
 
-export const displayUserRepositories = async() =>{
+export const displayUserRepositories = async(userId?: number) =>{
 
   try {
-    const response = await apiClient.get(`users/${id}/repositories`);
+    const response = await apiClient.get(`users/${userId}/repositories`);
     return response.data;
   }
   catch(error){

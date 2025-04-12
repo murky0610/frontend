@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { displayMyRepositories } from "@/api/api";
+import { displayUserRepositories } from "@/api/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,7 +30,13 @@ const commodityIcons = {//non required but many
   "Cavendish Banana": Banana,
 };
 
-export function DisplayMyRepositories() {
+interface DisplayMyRepositoriesProps {
+  userId?: number;
+}
+
+export function DisplayMyRepositories({ userId }: DisplayMyRepositoriesProps) {
+
+  console.log("this is the UserId: ", userId);
   const [repositories, setRepositories] = useState<RepositoryInterface[]>([]);
   const [error, setError] = useState<string | null>(null); 
   const [selectedRepo, setSelectedRepo] = useState<RepositoryInterface | null>(null);
@@ -40,7 +46,8 @@ export function DisplayMyRepositories() {
   // Fetch repositories function
   const fetchRepositories = async () => {
     try {
-      const data = await displayMyRepositories();
+
+      const data = await displayUserRepositories(userId);
       if (Array.isArray(data)) {
         setRepositories(data);
       } else {
@@ -59,8 +66,9 @@ export function DisplayMyRepositories() {
   };
 
   useEffect(() => {
+    if (userId === undefined || userId === null) return; // Don't run until userId is available
     fetchRepositories();
-  }, []);
+  }, [userId]);
 
   return (
 
