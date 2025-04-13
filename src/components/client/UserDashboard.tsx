@@ -112,6 +112,13 @@ export default function DashboardComponent() {
 
   return (
     <div className="flex flex-col p-6">
+      <div className="mx-6 my-4 p-4 rounded-xl bg-gradient-to-r from-[#e8f0fe] to-[#f0f4ff] border border-blue-100 shadow-sm">
+  <h2 className="text-lg font-semibold text-gray-800">Welcome to Dashboard</h2>
+  <p className="text-sm text-gray-600 mt-1">
+    This dashboard gives you a quick overview of all the repositories, directories, and statistics under your account. 
+    You can view summaries, manage your submissions, and explore partner data across the region—all in one place.
+  </p>
+</div>
       <div className="flex flex-row gap-4 w-full">
       <div className="w-1/2 bg-white rounded-lg shadow p-4">
       <p className="text-lg font-bold">Repository Info</p>
