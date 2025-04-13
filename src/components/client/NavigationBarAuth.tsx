@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import {
   NavigationMenu,
+  NavigationMenuItem,
   NavigationMenuList,
 
 } from "@/components/ui/navigation-menu"
@@ -139,7 +140,15 @@ export default function NavigationBarAuth() {
         <NavigationMenu>
           <NavigationMenuList>
            
-        
+          <NavigationMenuItem>
+
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+            
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
   
