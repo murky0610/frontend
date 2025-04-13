@@ -87,7 +87,15 @@ export function DisplayMyRepositories({ userId }: DisplayMyRepositoriesProps) {
       <div className="flex flex-row w-full">
       <div className="flex flex-col w-full">
       <div className="flex items-center justify-between max-w-screen p-5">
-      <h1 className="text-2xl font-bold">My Repositories</h1>
+    
+
+<div className="w-full mr-10 my-4 p-4 rounded-xl bg-gradient-to-r from-[#f0f4ff] to-[#f9faff] border border-blue-100 shadow-sm">
+  <h2 className="text-lg font-semibold text-gray-800">Take Charge of Your Repositories</h2>
+  <p className="text-sm text-gray-600 mt-1">
+  Easily manage your submitted research projects, policy briefs, and partner papers — review, refine, or add new entries anytime to keep your contributions up to date and impactful.
+  </p>
+</div>
+
       <Button onClick={() => setOpen(true)}>Add Entry</Button>
     </div>
         {error ? (

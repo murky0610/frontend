@@ -145,15 +145,25 @@ export function DisplayRepositories() {
   }, []);
 
   return (
-    <div className="flex items-center max-w-screen p-5">
-      <div className="flex flex-col w-full">
-        <div className="flex items-center justify-between max-w-screen p-5">
-          <h1 className="text-2xl font-bold">Explore All Repositories</h1>
-          <div className="flex items-center gap-4">
-            <Input 
-              type="search" 
-              placeholder="Search..." 
-              className="max-w-sm" 
+    <div className="max-w-screen px-5 py-5">
+      <div className="flex flex-col gap-4 w-full">
+        {/* Banner + Search/Filter row */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
+          {/* Banner */}
+          <div className="p-4 rounded-xl bg-gradient-to-r from-[#f0f4ff] to-[#f9faff] border border-blue-100 shadow-sm">
+            <h2 className="text-lg font-semibold text-gray-800">Your Gateway to Insightful Repositories</h2>
+            <p className="text-sm text-gray-600 mt-1">
+              Browse through a collection of research projects, policy briefs, and papers submitted by partner institutions. 
+              Use the filter or search tools to find specific topics or contributors.
+            </p>
+          </div>
+
+          {/* Search & Filter */}
+          <div className="flex items-center gap-4 w-full md:w-auto">
+            <Input
+              type="search"
+              placeholder="Search..."
+               className="w-full md:w-95"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
             />
@@ -164,12 +174,14 @@ export function DisplayRepositories() {
           </div>
         </div>
 
+        {/* Repository List or Error */}
         {error ? (
           <p className="text-red-500">{error}</p>
         ) : filteredRepositories.length === 0 ? (
           <p className="text-gray-500">No repositories found.</p>
         ) : (
-          <div className="flex flex-row">
+          <div className="flex flex-col md:flex-row gap-2">
+            {/* Cards Section */}
             <div className="grid grid-cols-1 gap-6 flex-1">
               {filteredRepositories.map((repo) => {
                 const CategoryIcon = categoryIcons[repo.select_category as keyof typeof categoryIcons];
@@ -183,7 +195,7 @@ export function DisplayRepositories() {
                       <CardTitle>{repo.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                    <Label className="text-gray-600">Published on: {repo.date_published}</Label>
+                      <Label className="text-gray-600">Published on: {repo.date_published}</Label>
                       <div className="flex flex-wrap gap-2 mt-2 items-center">
                         <Badge variant="lightGreen" className="flex items-center gap-1">
                           {CategoryIcon && <CategoryIcon className="w-4 h-4" />}
@@ -223,7 +235,7 @@ export function DisplayRepositories() {
                     </CardContent>
                     <CardContent>
                       <Label>
-                        Visit the Link: 
+                        Visit the Link:{" "}
                         <a
                           href={repo.url_repository}
                           target="_blank"
@@ -238,11 +250,13 @@ export function DisplayRepositories() {
                 );
               })}
             </div>
-            <div className="ml-10">
-            <RepositoryFilterSearch 
-          open={open} 
-          onApplyFilters={setActiveFilters}
-        />
+
+            {/* Filter Sidebar */}
+            <div className="w-full md:w-72 p-2">
+              <RepositoryFilterSearch
+                open={open}
+                onApplyFilters={setActiveFilters}
+              />
             </div>
           </div>
         )}
