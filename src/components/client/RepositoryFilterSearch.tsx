@@ -110,7 +110,7 @@ export default function RepositoryFilterSearch({ open, onApplyFilters }: Props) 
   return (
     <div className="w-full">
       {open && (
-        <div className="mt-4 border p-4 space-y-4 rounded-md bg-white shadow-sm">
+        <div className="border p-4 space-y-4 rounded-md bg-white shadow-sm">
           {/* Publication Year Filter */}
           <div className="space-y-2">
   <Label>Publication Year</Label>
