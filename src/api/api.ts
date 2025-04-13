@@ -98,6 +98,17 @@ export const editMyRepository = async (id: number, repository: Partial<Repositor
   }
 };
 
+export const deleteMyRepository = async (id: number) => {
+  try {
+    const response = await apiClient.delete(`repositories/${id}`);
+    console.log("Repository deleted:", response);
+    return response.data;
+  } catch (error) {
+    console.error('Deleting Repository error:', error);
+    throw error;
+  }
+};
+
 
 export const displayUserRepositories = async(userId?: number) =>{
 

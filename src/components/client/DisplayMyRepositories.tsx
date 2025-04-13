@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { displayUserRepositories } from "@/api/api";
+import { displayUserRepositories, deleteMyRepository } from "@/api/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,17 @@ import ModalAddRepository from "@/components/modal/ModalAddRepository";
 import { Separator } from "@/components/ui/separator";
 import { RepositoryInterface } from "@/interface/repository.interface";
 import ModalEditRepository from "@/components/modal/ModalEditRepostory";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 const categoryIcons = { //required only one
   "Policy Brief": Scale,
   "Paper": BookOpen,
@@ -160,7 +170,36 @@ export function DisplayMyRepositories({ userId }: DisplayMyRepositoriesProps) {
             
                   <div className="flex gap-2 p-4">
                   <Button onClick={() => setSelectedRepo(repo)}>Edit</Button>
-                    <Button variant={"destructive"}>Delete</Button>
+                  <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant={"destructive"}>Delete</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+           repository and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+  onClick={async () => {
+    try {
+      await deleteMyRepository(repo.id);
+      fetchRepositories(); // Refresh list after deletion
+    } catch (err) {
+      console.error(err);
+ 
+    }
+  }}
+>
+  Continue
+</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
                   </div>
                 </Card>
               );
@@ -168,6 +207,7 @@ export function DisplayMyRepositories({ userId }: DisplayMyRepositoriesProps) {
           </div>
         )}
       </div>
+    
       </div>
       <ModalAddRepository open={open} onClose={() => setOpen(false)} 
          onSuccess={() => {
