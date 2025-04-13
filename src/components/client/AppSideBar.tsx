@@ -12,7 +12,9 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar"
 import { getCurrentUser } from "@/api/api"
-
+import Link from "next/link"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
 const items = [
   { title: "Overview", url: "/dashboard", icon: SquareChartGantt },
   { title: "Repositories", url: "/repository", icon: Inbox },
@@ -21,6 +23,8 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   const [userRole, setUserRole] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -46,23 +50,42 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center justify-between px-4 py-2 border-b">
-        <span className="text-lg font-semibold">AAVCLAB</span>
+      <Link href="/home">
+            <Image
+              src="/VC Lab Logo PNG.png"
+              alt="AAVC Logo"
+              width={200}
+              height={50}
+              className="object-cover"
+            />
+          </Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>  
           <SidebarGroupContent>
-            <SidebarMenu>
-              {filteredItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
+      
+<SidebarMenu>
+  {filteredItems.map((item) => {
+    const isActive = pathname === item.url;
+    return (
+      <SidebarMenuItem key={item.title}>
+        <SidebarMenuButton
+          asChild
+          className={`flex items-center gap-3 px-4 py-2 rounded-md transition-colors ${
+            isActive
+              ? "bg-green-100 text-green-700 font-semibold border-r-4 border-green-500"
+              : "hover:bg-gray-100 text-gray-700"
+          }`}
+        >
+          <Link href={item.url} className="flex items-center gap-2 w-full">
+            <item.icon className="w-4 h-4" />
+            <span>{item.title}</span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  })}
+</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
