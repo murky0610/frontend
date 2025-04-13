@@ -37,10 +37,10 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { getCurrentUser, editCurrentUser } from "@/api/api"
+import { getCurrentUser, editCurrentUser, userLogout } from "@/api/api"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-
+import { toast } from "sonner"
 interface UserDetail {
   firstName: string;
   lastName: string;
@@ -107,168 +107,199 @@ export default function NavigationMenuDemo() {
   useEffect(() => {
     fetchUserData();
   }, []);
-
+  const logoutUserData = async () => {
+    try {
+      const response = await userLogout();
+      console.log("user logout successfully", response);
+      
+      toast.success("Logged out successfully!");
+      setUserDetail(null);
+      router.push('/home');
+      
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error("Failed to log out. Please try again.");
+    }
+  }
   return (
-    <div className="w-full flex items-center justify-between px-4 bg-[#991B1B]">
-      {/* Logo on the left */}
-      <Link href="/home">
+<div className="w-full flex items-center justify-between px-12 py-4 bg-white border-b border-gray-200">
+{/* Left Logo / Brand */}
+    <Link href="/">
+      <div className="flex items-center gap-2 cursor-pointer">
         <Image
-          src="/VC Lab Logo PNG.png"
+          src="/VC Lab Logo PNG.png" // Replace with your brand logo
           alt="AAVC Logo"
-          width={200}
+          width={150}
           height={50}
-          className="object-cover"
+          className="object-contain"
         />
-      </Link>
-
-      {/* Navigation Menu in the center */}
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>About Us</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[300px]">
-                {components.map((component) => (
-                  <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  />
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Services</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[300px]">
-                {features.map((feature) => (
-                  <ListItem
-                    key={feature.title}
-                    title={feature.title}
-                    href={feature.href}
-                  />
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/projects" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Projects
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/contact-us" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Contact Us
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      {/* Auth Section */}
-      <div className="flex gap-4 items-center">
-        {userDetail ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar className="cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                <AvatarFallback>
-                  {userDetail.firstName[0]}{userDetail.lastName[0]}
-                </AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{userDetail.firstName} {userDetail.lastName}</DropdownMenuLabel>
-              <DropdownMenuLabel><div className="text-center"> 
-                    {userDetail.role.charAt(0).toUpperCase() + userDetail.role.slice(1)}
-                    
-                    </div></DropdownMenuLabel> 
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-      onClick={() => router.push("/dashboard")} // Navigate programmatically
-      className="cursor-pointer flex items-center"
-    ><LayoutDashboard/>Dashboard</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setIsUserProfileOpen(true)}>
-                <UserRound className="mr-2 h-4 w-4" />
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <div className="flex gap-2">
-            <Button variant="outline" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/register">Sign Up</Link>
-            </Button>
-          </div>
-        )}
       </div>
+    </Link>
 
-      {/* Profile Edit Dialog */}
-      <Dialog open={isUserProfileOpen} onOpenChange={setIsUserProfileOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit Profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re done.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="firstName" className="text-right">
-                First Name
-              </Label>
-              <Input
-                id="firstName"
-                value={editFirstName}
-                className="col-span-3"
-                onChange={(e) => setEditFirstName(e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="lastName" className="text-right">
-                Last Name
-              </Label>
-              <Input
-                id="lastName"
-                value={editLastName}
-                className="col-span-3"
-                onChange={(e) => setEditLastName(e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right">
-                Email
-              </Label>
-              <Input
-                id="email"
-                value={editEmail}
-                className="col-span-3"
-                onChange={(e) => setEditEmail(e.target.value)}
-              />
-            </div>
+    {/* Center Nav Menu */}
+    <NavigationMenu>
+    <NavigationMenuList className="flex items-center space-x-4 text-black">
+  <NavigationMenuItem>
+    <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
+      About Us
+    </NavigationMenuTrigger>
+    <NavigationMenuContent>
+      <ul className="grid w-[300px] gap-3 p-4 text-gray-700">
+        {components.map((component) => (
+          <li key={component.title}>
+            <Link href={component.href}>
+              <div className="text-sm hover:underline">{component.title}</div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </NavigationMenuContent>
+  </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
+            Services
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[300px] gap-3 p-4">
+              {features.map((feature) => (
+                <li key={feature.title}>
+                  <Link href={feature.href}>
+                    <div className="text-sm hover:underline">{feature.title}</div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link href="/projects" passHref legacyBehavior>
+            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+              Projects
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link href="/contact-us" passHref legacyBehavior>
+            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+              Contact Us
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+
+    {/* Right Auth Section */}
+    <div className="flex items-center gap-4">
+      {userDetail ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="cursor-pointer hover:ring-2 hover:ring-gray-300 transition duration-200">
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>
+                {userDetail.firstName[0]}
+                {userDetail.lastName[0]}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            <DropdownMenuLabel className="font-semibold">
+              {userDetail.firstName} {userDetail.lastName}
+            </DropdownMenuLabel>
+            <DropdownMenuLabel>
+              <div className="text-center text-sm text-gray-500">
+                {userDetail.role.charAt(0).toUpperCase() + userDetail.role.slice(1)}
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => router.push("/dashboard")}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <LayoutDashboard className="h-4 w-4" />
+              Dashboard
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setIsUserProfileOpen(true)}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <UserRound className="h-4 w-4" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => logoutUserData()}> <LogOut/>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <div className="flex items-center space-x-2">
+          <Link href="/login" className="text-gray-700 hover:underline">
+            Sign In
+          </Link>
+          <Button variant="outline" asChild>
+            <Link href="/register">Sign Up</Link>
+          </Button>
+        </div>
+      )}
+    </div>
+
+    {/* Profile Edit Dialog */}
+    <Dialog open={isUserProfileOpen} onOpenChange={setIsUserProfileOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you’re done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="firstName" className="text-right">
+              First Name
+            </Label>
+            <Input
+              id="firstName"
+              value={editFirstName}
+              className="col-span-3"
+              onChange={(e) => setEditFirstName(e.target.value)}
+            />
           </div>
-          <DialogFooter>
-            <Button onClick={() => {
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="lastName" className="text-right">
+              Last Name
+            </Label>
+            <Input
+              id="lastName"
+              value={editLastName}
+              className="col-span-3"
+              onChange={(e) => setEditLastName(e.target.value)}
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="email" className="text-right">
+              Email
+            </Label>
+            <Input
+              id="email"
+              value={editEmail}
+              className="col-span-3"
+              onChange={(e) => setEditEmail(e.target.value)}
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button
+            onClick={() => {
               editUserData();
               setIsUserProfileOpen(false);
-            }}>
-              Save changes
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </div>
+            }}
+          >
+            Save changes
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  </div>
   )
 }
 
