@@ -9,7 +9,7 @@ import {
 
 } from "@/components/ui/navigation-menu"
 import Image from "next/image"
-
+import { usePathname } from 'next/navigation';
 import {
     Avatar,
     AvatarFallback,
@@ -62,6 +62,7 @@ export default function NavigationBarAuth() {
     const [editFirstName, setEditFirstName] = useState('');
     const [editLastName, setEditLastName] = useState('');
     const [editEmail, setEditEmail] = useState('');
+    const pathname = usePathname();
     const fetchUserData = async () => {
       try{
         const response = await getCurrentUser();
@@ -122,35 +123,23 @@ export default function NavigationBarAuth() {
     }
   
     return (
-      <div className="w-full flex items-center justify-between px-4">
-        {/* Logo on the left */}
-        <div className="flex items-center gap-2">
-          {/* <SidebarTrigger /> */}
-          <Link href="/home">
-            <Image
-              src="/VC Lab Logo PNG.png"
-              alt="AAVC Logo"
-              width={200}
-              height={50}
-              className="object-cover"
-            />
-          </Link>
-        </div>
-
-        <NavigationMenu>
-          <NavigationMenuList>
-           
-          <NavigationMenuItem>
-
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-            
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+<div className="w-full flex items-center justify-between px-6 py-4 shadow-md">
+  {/* Left Side - Dynamic Page Title */}
+  <div className="flex items-center gap-3">
+    {pathname === "/repository" ? (
+      <p className="text-2xl font-bold text-gray-800 drop-shadow-md">
+        Explore <span className="text-indigo-600">All Repositories</span>
+      </p>
+    ) : pathname === "/my-repository" ? (
+      <p className="text-2xl font-bold text-gray-800 drop-shadow-md">
+        My <span className="text-indigo-600">Repositories</span>
+      </p>
+    ) : (
+      <p className="text-2xl font-bold text-gray-800 drop-shadow-md">
+        Welcome Back, <span className="text-indigo-600">AAVC Personnel</span>
+      </p>
+    )}
+  </div>
   
         {/* Login/Signup buttons on the right */}
         <div className="flex gap-4 items-center">
