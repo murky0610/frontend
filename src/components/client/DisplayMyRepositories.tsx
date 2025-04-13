@@ -84,9 +84,8 @@ export function DisplayMyRepositories({ userId }: DisplayMyRepositoriesProps) {
 
     
     <div className="flex items-center max-w-screen p-5">
-      <div className="flex flex-row">
-    
-      <div className="flex flex-col">
+      <div className="flex flex-row w-full">
+      <div className="flex flex-col w-full">
       <div className="flex items-center justify-between max-w-screen p-5">
       <h1 className="text-2xl font-bold">My Repositories</h1>
       <Button onClick={() => setOpen(true)}>Add Entry</Button>
