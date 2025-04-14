@@ -1,5 +1,6 @@
 "use client"
-import { getAllUsers, editCurrentUser } from "@/api/api"
+//import { getAllUsers, editCurrentUser } from "@/api/api"
+import { getAllUsers } from "@/api/api"
 import { UserAccountsInterface } from "@/interface/user-accounts.interface"
 import { useState, useEffect } from "react"
 import { Button } from "../ui/button"
@@ -39,11 +40,11 @@ export function AllUserScreen() {
       }))
       
       // Update backend
-      await Promise.all(
-        Object.entries(pendingChanges).map(([userId, newRole]) => 
-          editCurrentUser(parseInt(userId), { role: newRole })
-        )
-      )
+      // await Promise.all(
+      //   Object.entries(pendingChanges).map(([userId, newRole]) => 
+      //     editCurrentUser(parseInt(userId), { role: newRole })
+      //   )
+      // )
 
       setAllUsers(updatedUsers)
       setPendingChanges({})
