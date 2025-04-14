@@ -146,8 +146,10 @@ export default function ModalEditRepository({
         const newErrors: Record<string, string[]> = {};
     
         Object.entries(formattedErrors).forEach(([key, val]) => {
-          if (key !== "_errors") {
-            newErrors[key] = val?._errors || [];
+          if (typeof val === "object" && "_errors" in val) {
+            newErrors[key] = val._errors;
+          } else {
+            newErrors[key] = [];
           }
         });
     
