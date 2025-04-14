@@ -2,7 +2,7 @@ import React from "react"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
 
-export function whoWe() {
+export default function WhoWeArePage() {
   const divisions = [
     {
       name: "Project Leader",
@@ -169,9 +169,15 @@ export function whoWe() {
     </div>
   )
 }
-
+interface TeamMember {
+  name: string;
+  position: string;
+  profileImage: string;
+  googleScholarLink?: string;
+  linkedinLink?: string;
+}
 // Reusable card component
-function ProfileCard({ team }) {
+function ProfileCard({ team }: { team: TeamMember }) {
   return (
     <Card className="w-[300px] p-2 hover:shadow-lg transition-shadow duration-300">
       <div className="relative w-full h-48 mb-2">
@@ -216,4 +222,4 @@ function ProfileCard({ team }) {
   )
 }
 
-export default whoWe
+
