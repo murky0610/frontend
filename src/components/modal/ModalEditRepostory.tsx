@@ -38,11 +38,11 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+
 } from "@/components/ui/select";
 import { RepositoryInterface } from "@/interface/repository.interface";
 import { editMyRepository } from "@/api/api";
-import { AddRepositoryType, addRepositorySchema } from "@/schema/addrepository.schema";
+import { addRepositorySchema } from "@/schema/addrepository.schema";
 
 import { toast } from "sonner"
 
@@ -110,16 +110,16 @@ export default function ModalEditRepository({
     }
   };
 
-  const renderSelectItems = (items: Record<string, React.ElementType>) => {
-    return Object.entries(items).map(([key, IconComponent]) => (
-      <SelectItem key={key} value={key}>
-        <div className="flex items-center gap-2">
-          <IconComponent className="w-4 h-4" />
-          <span>{key}</span>
-        </div>
-      </SelectItem>
-    ));
-  };
+  // const renderSelectItems = (items: Record<string, React.ElementType>) => {
+  //   return Object.entries(items).map(([key, IconComponent]) => (
+  //     <SelectItem key={key} value={key}>
+  //       <div className="flex items-center gap-2">
+  //         <IconComponent className="w-4 h-4" />
+  //         <span>{key}</span>
+  //       </div>
+  //     </SelectItem>
+  //   ));
+  // };
   const renderSelectTrigger = (
     value: string,
     icons: Record<string, React.ElementType>,

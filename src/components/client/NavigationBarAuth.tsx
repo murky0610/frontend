@@ -1,14 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-
-} from "@/components/ui/navigation-menu"
-import Image from "next/image"
 import { usePathname } from 'next/navigation';
 import {
     Avatar,

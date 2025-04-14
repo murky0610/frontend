@@ -8,7 +8,7 @@ import {
     TabsContent,
   } from "@/components/ui/tabs"; 
 
-  import { Card, CardContent,CardDescription,CardFooter,CardHeader,CardTitle } from '@/components/ui/card';
+  import { Card, CardContent,CardDescription,CardHeader,CardTitle } from '@/components/ui/card';
 export default function ExampleComponent() {
   return (
     <div className="w-full max-w-6xl m-auto">
