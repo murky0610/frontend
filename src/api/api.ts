@@ -13,7 +13,6 @@ const apiClient = axios.create({
   withCredentials: true, // Include credentials with requests if needed
   headers: {
     "Content-Type": "application/json",
-    'Access-Control-Allow-Origin': 'https://frontend-nine-inky-16.vercel.app' // Ensure JSON format
   },
 });
 
@@ -38,7 +37,7 @@ export const userLogin = async (email: any, password: any) => {
   export const refreshToken = async () => {
 
     try {
-      const response = await apiClient.post('/token/refresh/')
+      const response = await apiClient.post('token/refresh/')
       console.log("this is refresh token: ", response);
       return response.data.refreshed;
     } catch (error) {
@@ -49,7 +48,7 @@ export const userLogin = async (email: any, password: any) => {
   
   export const userLogout = async () => {
 
-    const response = await apiClient.post('/logout/')
+    const response = await apiClient.post('logout/')
     return response.data;
 
   }
