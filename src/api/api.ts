@@ -4,8 +4,12 @@ import axios from 'axios';
 import { RepositoryInterface } from '@/interface/repository.interface';
 import { UserRegisterInterface, userRegisterSchema } from '@/schema/user-register.schema';
 // Create an Axios instance with a predefined baseURL
+
+
+const baseURL = "https://core-five-orpin.vercel.app/"
+
 const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: baseURL,//'http://127.0.0.1:8000/api/',
   withCredentials: true, // Include credentials with requests if needed
   headers: {
     "Content-Type": "application/json", // Ensure JSON format
