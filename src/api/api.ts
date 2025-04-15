@@ -9,7 +9,7 @@ import { UserRegisterInterface, userRegisterSchema } from '@/schema/user-registe
 //const baseURL = "https://core-five-orpin.vercel.app/api"
 
 const apiClient = axios.create({
-  baseURL: 'https://core-five-orpin.vercel.app/api',
+  baseURL: 'https://core-five-orpin.vercel.app/api/',
   withCredentials: true, // Include credentials with requests if needed
   headers: {
     "Content-Type": "application/json",
