@@ -12,7 +12,8 @@ const apiClient = axios.create({
   baseURL: 'https://core-five-orpin.vercel.app/api',
   withCredentials: true, // Include credentials with requests if needed
   headers: {
-    "Content-Type": "application/json", // Ensure JSON format
+    "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': 'https://frontend-nine-inky-16.vercel.app' // Ensure JSON format
   },
 });
 
