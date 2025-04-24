@@ -50,7 +50,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center justify-between px-4 py-2 border-b">
-      <Link href="/home">
+      <Link href="/home" legacyBehavior>
             <Image
               src="/VC Lab Logo PNG.png"
               alt="AAVC Logo"
@@ -77,7 +77,7 @@ export function AppSidebar() {
               : "hover:bg-gray-100 text-gray-700"
           }`}
         >
-          <Link href={item.url} className="flex items-center gap-2 w-full">
+          <Link href={item.url} className="flex items-center gap-2 w-full" legacyBehavior>
             <item.icon className="w-4 h-4" />
             <span>{item.title}</span>
           </Link>
@@ -90,5 +90,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }
