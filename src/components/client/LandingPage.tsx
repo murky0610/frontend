@@ -46,7 +46,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
       {/* 2) Project Overview Section */}
       <section className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4">
@@ -121,7 +120,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
       {/* 3) Facilities & Tools Section */}
       <section className="bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4">
@@ -143,7 +141,10 @@ export default function LandingPage() {
                 methodologies and best practices for commodities like coffee, cacao, 
                 and Cavendish banana.
               </p>
-              <Link href="/repository" className="inline-flex items-center text-green-600 mt-2 font-semibold hover:underline">
+              <Link
+                href="/repository"
+                className="inline-flex items-center text-green-600 mt-2 font-semibold hover:underline"
+                legacyBehavior>
                 Learn More
                 <ChevronRight className="ml-1 w-4 h-4" />
               </Link>
@@ -156,7 +157,10 @@ export default function LandingPage() {
                 From cost calculators to market profit optimizers, these apps enhance 
                 profitability, efficiency, and transparency across the agri-aqua chain.
               </p>
-              <Link href="/field-assistant" className="inline-flex items-center text-green-600 mt-2 font-semibold hover:underline">
+              <Link
+                href="/field-assistant"
+                className="inline-flex items-center text-green-600 mt-2 font-semibold hover:underline"
+                legacyBehavior>
                 View Apps
                 <ChevronRight className="ml-1 w-4 h-4" />
               </Link>
@@ -164,7 +168,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
       {/* 4) Roadmap & Timeline Section */}
       <section className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4">
@@ -199,7 +202,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
       {/* 5) Final CTA Section */}
       <section
         className="relative bg-cover bg-center bg-no-repeat py-16"
@@ -226,7 +228,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
       {/* 6) Footer */}
       <footer className="bg-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">

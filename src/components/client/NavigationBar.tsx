@@ -121,185 +121,182 @@ export default function NavigationMenuDemo() {
     }
   }
   return (
-<div className="w-full flex items-center justify-between px-12 py-4 bg-white border-b border-gray-200">
-{/* Left Logo / Brand */}
-    <Link href="/">
-      <div className="flex items-center gap-2 cursor-pointer">
-        <Image
-          src="/VC Lab Logo PNG.png" // Replace with your brand logo
-          alt="AAVC Logo"
-          width={150}
-          height={50}
-          className="object-contain"
-        />
-      </div>
-    </Link>
+    <div className="w-full flex items-center justify-between px-12 py-4 bg-white border-b border-gray-200">
+      {/* Left Logo / Brand */}
+      <Link href="/" legacyBehavior>
+        <div className="flex items-center gap-2 cursor-pointer">
+          <Image
+            src="/VC Lab Logo PNG.png" // Replace with your brand logo
+            alt="AAVC Logo"
+            width={150}
+            height={50}
+            className="object-contain"
+          />
+        </div>
+      </Link>
+      {/* Center Nav Menu */}
+      <NavigationMenu>
+      <NavigationMenuList className="flex items-center space-x-4 text-black">
+    <NavigationMenuItem>
+      <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
+        About Us
+      </NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul className="grid w-[300px] gap-3 p-4 text-gray-700">
+          {components.map((component) => (
+            <li key={component.title}>
+              <Link href={component.href} legacyBehavior>
+                <div className="text-sm hover:underline">{component.title}</div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
 
-    {/* Center Nav Menu */}
-    <NavigationMenu>
-    <NavigationMenuList className="flex items-center space-x-4 text-black">
-  <NavigationMenuItem>
-    <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
-      About Us
-    </NavigationMenuTrigger>
-    <NavigationMenuContent>
-      <ul className="grid w-[300px] gap-3 p-4 text-gray-700">
-        {components.map((component) => (
-          <li key={component.title}>
-            <Link href={component.href}>
-              <div className="text-sm hover:underline">{component.title}</div>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
+              Services
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[300px] gap-3 p-4">
+                {features.map((feature) => (
+                  <li key={feature.title}>
+                    <Link href={feature.href} legacyBehavior>
+                      <div className="text-sm hover:underline">{feature.title}</div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link href="/projects" passHref legacyBehavior>
+              <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+                Projects
+              </NavigationMenuLink>
             </Link>
-          </li>
-        ))}
-      </ul>
-    </NavigationMenuContent>
-  </NavigationMenuItem>
+          </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
-            Services
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[300px] gap-3 p-4">
-              {features.map((feature) => (
-                <li key={feature.title}>
-                  <Link href={feature.href}>
-                    <div className="text-sm hover:underline">{feature.title}</div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <Link href="/projects" passHref legacyBehavior>
-            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
-              Projects
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <Link href="/contact-us" passHref legacyBehavior>
-            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
-              Contact Us
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
-
-    {/* Right Auth Section */}
-    <div className="flex items-center gap-4">
-      {userDetail ? (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="cursor-pointer hover:ring-2 hover:ring-gray-300 transition duration-200">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>
-                {userDetail.firstName[0]}
-                {userDetail.lastName[0]}
-              </AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuLabel className="font-semibold">
-              {userDetail.firstName} {userDetail.lastName}
-            </DropdownMenuLabel>
-            <DropdownMenuLabel>
-              <div className="text-center text-sm text-gray-500">
-                {userDetail.role.charAt(0).toUpperCase() + userDetail.role.slice(1)}
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => router.push("/dashboard")}
-              className="flex items-center gap-2 cursor-pointer"
+          <NavigationMenuItem>
+            <Link href="/contact-us" passHref legacyBehavior>
+              <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+                Contact Us
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      {/* Right Auth Section */}
+      <div className="flex items-center gap-4">
+        {userDetail ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar className="cursor-pointer hover:ring-2 hover:ring-gray-300 transition duration-200">
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>
+                  {userDetail.firstName[0]}
+                  {userDetail.lastName[0]}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuLabel className="font-semibold">
+                {userDetail.firstName} {userDetail.lastName}
+              </DropdownMenuLabel>
+              <DropdownMenuLabel>
+                <div className="text-center text-sm text-gray-500">
+                  {userDetail.role.charAt(0).toUpperCase() + userDetail.role.slice(1)}
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => router.push("/dashboard")}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Dashboard
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setIsUserProfileOpen(true)}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <UserRound className="h-4 w-4" />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => logoutUserData()}> <LogOut/>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <div className="flex items-center space-x-2">
+            <Link href="/login" className="text-gray-700 hover:underline">
+              Sign In
+            </Link>
+            <Button variant="outline" asChild>
+              <Link href="/register">Sign Up</Link>
+            </Button>
+          </div>
+        )}
+      </div>
+      {/* Profile Edit Dialog */}
+      <Dialog open={isUserProfileOpen} onOpenChange={setIsUserProfileOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you’re done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="firstName" className="text-right">
+                First Name
+              </Label>
+              <Input
+                id="firstName"
+                value={editFirstName}
+                className="col-span-3"
+                onChange={(e) => setEditFirstName(e.target.value)}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="lastName" className="text-right">
+                Last Name
+              </Label>
+              <Input
+                id="lastName"
+                value={editLastName}
+                className="col-span-3"
+                onChange={(e) => setEditLastName(e.target.value)}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="email" className="text-right">
+                Email
+              </Label>
+              <Input
+                id="email"
+                value={editEmail}
+                className="col-span-3"
+                onChange={(e) => setEditEmail(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              onClick={() => {
+                editUserData();
+                setIsUserProfileOpen(false);
+              }}
             >
-              <LayoutDashboard className="h-4 w-4" />
-              Dashboard
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setIsUserProfileOpen(true)}
-              className="flex items-center gap-2 cursor-pointer"
-            >
-              <UserRound className="h-4 w-4" />
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => logoutUserData()}> <LogOut/>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ) : (
-        <div className="flex items-center space-x-2">
-          <Link href="/login" className="text-gray-700 hover:underline">
-            Sign In
-          </Link>
-          <Button variant="outline" asChild>
-            <Link href="/register">Sign Up</Link>
-          </Button>
-        </div>
-      )}
+              Save changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
-
-    {/* Profile Edit Dialog */}
-    <Dialog open={isUserProfileOpen} onOpenChange={setIsUserProfileOpen}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit Profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you’re done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="firstName" className="text-right">
-              First Name
-            </Label>
-            <Input
-              id="firstName"
-              value={editFirstName}
-              className="col-span-3"
-              onChange={(e) => setEditFirstName(e.target.value)}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="lastName" className="text-right">
-              Last Name
-            </Label>
-            <Input
-              id="lastName"
-              value={editLastName}
-              className="col-span-3"
-              onChange={(e) => setEditLastName(e.target.value)}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
-              Email
-            </Label>
-            <Input
-              id="email"
-              value={editEmail}
-              className="col-span-3"
-              onChange={(e) => setEditEmail(e.target.value)}
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button
-            onClick={() => {
-              editUserData();
-              setIsUserProfileOpen(false);
-            }}
-          >
-            Save changes
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  </div>
-  )
+  );
 }
 
 const ListItem = React.forwardRef<
