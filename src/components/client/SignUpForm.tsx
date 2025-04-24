@@ -15,6 +15,7 @@ import { useState } from "react"
 import { userRegister } from "@/api/api"
 import { UserRegisterInterface, userRegisterSchema } from "@/schema/user-register.schema"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export function SignUpForm() {
   const router = useRouter();
@@ -191,9 +192,9 @@ export function SignUpForm() {
 
       <div className="text-center text-sm">
         Already have an account?{" "}
-        <a href="/login" className="underline underline-offset-4">
+        <Link href="/login" className="underline underline-offset-4">
           Login
-        </a>
+        </Link>
       </div>
     </div>
   );

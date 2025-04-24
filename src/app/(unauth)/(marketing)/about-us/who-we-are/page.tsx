@@ -1,6 +1,7 @@
 import React from "react"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function WhoWeArePage() {
   const divisions = [
@@ -192,7 +193,7 @@ function ProfileCard({ team }: { team: TeamMember }) {
       <p className="text-gray-500 text-center">{team.position}</p>
       <div className="flex justify-center items-center space-x-4 p-2">
         {team.googleScholarLink && (
-          <a
+          <Link
             href={team.googleScholarLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -204,10 +205,10 @@ function ProfileCard({ team }: { team: TeamMember }) {
               height={24}
               className="object-contain"
             />
-          </a>
+          </Link>
         )}
         {team.linkedinLink && (
-          <a href={team.linkedinLink} target="_blank" rel="noopener noreferrer">
+          <Link href={team.linkedinLink} target="_blank" rel="noopener noreferrer">
             <Image
               src="/li_logo.png"
               alt="LinkedIn"
@@ -215,7 +216,7 @@ function ProfileCard({ team }: { team: TeamMember }) {
               height={24}
               className="object-contain"
             />
-          </a>
+          </Link>
         )}
       </div>
     </Card>

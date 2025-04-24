@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { userLogin } from "@/api/api";
+import Link from "next/link";
 
 export function LoginForm() {
 
@@ -35,12 +36,12 @@ export function LoginForm() {
         <div className="grid gap-2">
           <div className="flex items-center">
             <Label htmlFor="password">Password</Label>
-            <a
+            <Link
               href="#"
               className="ml-auto text-sm underline-offset-4 hover:underline"
             >
               Forgot your password?
-            </a>
+            </Link>
           </div>
           <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value)} value={password} />
         </div>
@@ -75,9 +76,9 @@ export function LoginForm() {
       <br></br>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a href="/register" className="underline underline-offset-4">
+        <Link href="/register" className="underline underline-offset-4">
           Sign up
-        </a>
+        </Link>
       </div>
       </div>
   )

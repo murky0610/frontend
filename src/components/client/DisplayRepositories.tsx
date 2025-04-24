@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { RepositoryInterface } from "@/interface/repository.interface";
 import { Input } from "@/components/ui/input";
 import RepositoryFilterSearch from "@/components/client/RepositoryFilterSearch";
+import Link from "next/link";
 
 const categoryIcons = {
   "Policy Brief": Scale,
@@ -236,14 +237,14 @@ export function DisplayRepositories() {
                     <CardContent>
                       <Label>
                         Visit the Link:{" "}
-                        <a
+                        <Link
                           href={repo.url_repository}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:underline mt-2 block"
                         >
                           {repo.url_repository}
-                        </a>
+                        </Link>
                       </Label>
                     </CardContent>
                   </Card>

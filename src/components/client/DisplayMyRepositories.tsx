@@ -22,6 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import Link from "next/link";
 const categoryIcons = { //required only one
   "Policy Brief": Scale,
   "Paper": BookOpen,
@@ -163,14 +164,14 @@ export function DisplayMyRepositories({ userId }: DisplayMyRepositoriesProps) {
     <CardContent>
     <Label>
       Visit the Link: 
-                    <a
+                    <Link
                       href={repo.url_repository}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline mt-2 block"
                     >
                       {repo.url_repository}
-                    </a>
+                    </Link>
                     </Label>
                   </CardContent>
 
