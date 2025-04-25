@@ -35,7 +35,7 @@ export default function WhoWeArePage() {
         {
           name: "a/Prof. Jon Henly O. Santillan",
           position: "Project Staff",
-          profileImage: "/Staff Pictures/Oguis.jpg",
+          profileImage: "/Staff Pictures/Santillan.jpg",
           googleScholarLink: "https://scholar.google.com/citations?user=BHsOCdoAAAAJ&hl=en&oi=ao",
           linkedinLink: "https://www.linkedin.com/in/dummySEO",
         },
