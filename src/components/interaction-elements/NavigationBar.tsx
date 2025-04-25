@@ -239,7 +239,13 @@ export default function NavigationMenuDemo() {
     </ul>
   </NavigationMenuContent>
 </NavigationMenuItem>
-
+<NavigationMenuItem>
+          <Link href="/news-events" passHref legacyBehavior>
+            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+              News and Events
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/projects" passHref legacyBehavior>
             <NavigationMenuLink className="hover:text-gray-600 transition-colors">

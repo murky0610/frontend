@@ -1,7 +1,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/client/AppSideBar"
+import { AppSidebar } from "@/components/interaction-elements/AppSideBar"
 import { Toaster } from "@/components/ui/sonner";
-import NavigationBarAuth from "@/components/client/NavigationBarAuth";
+import NavigationBarAuth from "@/components/interaction-elements/NavigationBarAuth";
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
