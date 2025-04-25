@@ -17,7 +17,6 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 const items = [
   { title: "Overview", url: "/dashboard", icon: SquareChartGantt },
-  { title: "Repositories", url: "/repository", icon: Inbox },
   { title: "My Repositories", url: "/my-repository", icon: Calendar },
   { title: "Manage Users", url: "/user-profile", icon: User },
 ];

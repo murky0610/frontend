@@ -1,265 +1,100 @@
-"use client"
+import Link from "next/link"
+import { ExternalLink } from "lucide-react"
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 
-// Import icons from lucide-react
-import  {Cpu, Database, ChartArea } from "lucide-react"
+// Publication data
+const publications = [
+  {
+    title:
+      "Productivity and technical efficiency of Robusta coffee farms at varying elevation categories in Sultan Kudarat, Philippines: implications on sustainability",
+    type: "Paper",
+    technology: "Technology",
+    crop: "Coffee",
+    authors: "Saguimpa, M.J.S., Digal, L.N.",
+    abstract:
+      "Elevation can affect agricultural outputs, affecting farms' productivity and efficiency. This article identified the significant production inputs influencing productivity and factors influencing technical efficiency (TE) and determined the average TE scores of Robusta coffee farms at varying elevations in Sultan Kudarat, Philippines. Cross-sectional data from the Mahintana Foundation, Inc. using random stratified sampling and power analysis from September 9, 2021, to January 13, 2022, were used to analyze 604 farms from areas ranging from 0.33 to 1284.18 above mean sea level (amsl), classified as low, medium, and high elevation. Open-Data-Kit-based (ODK) mobile data collection systems were utilized to precisely determine the farms' coordinates and elevation. Using stochastic frontier analysis, results showed that increasing the total fertilizer amount and total trees by 1% significantly increased yield by 0.20% and 0.79%, respectively. Meanwhile, increasing the total land area by 1%, including areas unutilized for coffee farming, decreases total yield by 0.11%. Regarding TE, results showed that TE decreases by approximately 0.58% at high elevations. Meanwhile, increasing net income from coffee farming alone by 1% significantly increases TE by 0.00008%. With an average TE of 0.60, 0.77, and 0.63 in low, medium, and high elevations, farms may be incentivized to improve farming practices to increase their TE further. TE improvement recommendations include promoting coffee-agroforestry systems and ecolabelling at medium elevations, such as shade-grown coffee, to promote sustainable production in Robusta coffee farms by assigning a premium to consumers demanding environmental conservation.",
+    link: "https://link.springer.com/article/10.1007/s11629-024-8746-1",
+  },
+  {
+    title:
+      "Exploring Product Diversification: The Case of Contract and Non-contract Farmers in the Philippine Cavendish Banana Value Chain (International Journal on Food System Dynamics)",
+    type: "Paper",
+    technology: "Value Adding",
+    crop: "Cavendish Banana",
+    authors: "Limpoco, Marie Analiz April A. & Digal, Larry N., 2023.",
+    abstract:
+      "Uncertainties arising from market fluctuations limit choices of banana famers under contracts. However, they can opt not to renew their contracts with multi-national firms to sell to spot market or diversify. This paper examines optimal portfolio of Cavendish banana products of contract and non-contract farmers under uncertainty. We explore the effect of diversification by including banana flour from rejects aside from fresh banana. Constrained M-estimation of parameters and robust portfolio optimization results show that (1) non-contract farms benefit more from diversifying compared to contract farms; and (2) prices are higher for non-contract farms but profits are lower compared to contract farms.",
+    link: "https://brill.com/view/journals/fsd/14/4/article-p419_5.xml",
+  },
+  {
+    title:
+      "Comparative analysis of women-led and agrarian reform beneficiaries cooperatives in Davao City: Cocoa value chain using a gender lens in the face of vulnerability (Consultative Group on International Agricultural Research)",
+    type: "Paper",
+    technology: "Value Adding",
+    crop: "Cacao",
+    authors:
+      "Lopez, Mitchiko Ariola; Lapitan, Aileen V.; Aranas, Mia Barbara D.; Faylon, Rassel P.; Anastacio, Nico Jayson C.; Predo, Canesio D.; Flores, Emmanuel. 2023.",
+    abstract:
+      "This paper presents a comparative study using a gender lens in examining how two groups engaged in the cocoa value chain in Davao City, Philippines, addressed challenges and leveraged innovative strategies amidst a backdrop of vulnerability. The first group is a womenled cooperative, while the other group is a cooperative of Agrarian Reform Beneficiaries (ARB) operating for 35 and 30 years, respectively, within conflict and nonconflict areas. A rapid value-chain assessment was conducted through a series of focus group discussions and key informant interviews with members/officers of the cooperatives. The assessment was also supported by the available secondary data. Results highlight the unique roles and contributions of women in Davao City's cocoa value chain. A women-led cooperative has a one-of-a-kind innovation of buying and consolidating cocoa pods from tagged trees rather than wet or dried beans to ascertain 'tree-to-bar' quality standards. It is a way of navigating various challenges in cocoa production—accessibility of needed services, lack of postharvest facilities, and marketing difficulties within a community in transition from conflict. The ARB cooperative with its access to diverse services, and capital (financial, equipment, facilities) has diversified from dried fermented cocoa beans to a wide array of value-added products involving mostly women workers. Innovation thrives when women workers and/or leaders have agency and power. Innovations are eased by persistent gender sensitivity and mainstreaming efforts. Recommendations leading to desired transformative change in agri-food systems in this part of the world are also discussed in the paper.",
+    link: "https://cgspace.cgiar.org/server/api/core/bitstreams/ba176ba6-7ebb-476f-86d8-21607c00c07e/content",
+  },
+  {
+    title:
+      "Smallholder Inclusion Through Cooperative Contract Farming of Cavendish Banana Farmers in Davao del Norte, Philippines: A Meta-Frontier Analysis (Agribusiness)",
+    type: "Paper",
+    technology: "Clustering",
+    crop: "Cavendish Banana",
+    authors: "Sarmiento, J. M., Rola-Rubzen, M.F., Fogarty, J. Digal, L.",
+    abstract:
+      "As the third‐highest global supplier of Cavendish bananas, the Philippine banana industry has a vital role in rural development. We compared farmers' technical efficiency (TE) and production performance across different contract farming arrangements: individual contracts, cooperative contracts, and growers without a contract. Using a random sample of 186 farmers in Davao del Norte, Philippines, we used meta‐frontier Data Envelopment Analysis to calculate TE scores and then use a truncated regression with bootstrapping to model the efficiency sources. We applied propensity score matching to minimize observable bias resulting from self‐selection among farmers participating in contract farming. The results across returns‐to‐scale assumptions and matching methods reveal that cooperative contract farmers have significantly higher TE and revenue performance than individual and noncontract farmers, primarily due to high export‐quality production and associated premium prices. Individual contract farmers were also more technically efficient and had higher returns than noncontract farmers. Smallholder farmers tend to participate more in cooperative contract farming. Thus, cooperative contracts should include smallholder farmers in export value chains to improve smallholder farmer income. This strategy will lead to the formation of inclusive agrifood value chains in Mindanao, Philippines.",
+    link: "https://www.researchgate.net/publication/350612935_Factors_Affecting_Participation_in_Contract_Farming_of_Smallholder_Cavendish_Banana_Farmers_in_the_Philippines",
+  },
+  {
+    title:
+      "Choice of agri-credit source among Cavendish banana farmers: evidence from Southern Philippines (Southeastern Philippines Journal of Research and Development)",
+    type: "Paper",
+    technology: "Value Adding",
+    crop: "Cavendish Banana",
+    authors: "Loquias, M., Placencia, S. G., & Digal, L.",
+    abstract:
+      "The Cavendish banana industry presents various opportunities for the Philippine agricultural sector; however, the threats of high development, production, and maintenance costs and the persisting Fusarium Wilt issue impede farmers from harnessing these opportunities. With the high production cost, agricultural credit becomes the fastest solution to sustain production. This study examines the factors affecting the choice of agri-credit source of smallholder Cavendish banana farmers in the Philippines. Using a multinomial regression model, survey data from 187 Cavendish banana farmers in Davao del Norte, Philippines, were analyzed to determine the factors influencing the choice of credit source. The credit sources were classified as categorical variables with 'no credit' as the base outcome. Results showed that factors such as education, contract arrangement, and level of barangay infrastructure significantly affected the choice of credit source of the farmers. Key findings also show that farmers who loaned from formal sources had higher output and farm incomes than those who had no credit and those who loaned from informal credit. The results can potentially aid the government in crafting policies and interventions relating to improved access to formal credit. Very few studies have explored the credit choice of farmers in the context of an important export commodity such as the Cavendish banana industry. As such, this study can add to the body of knowledge on agricultural finance, especially in the context of an export industry.",
+    link: "https://journal.usep.edu.ph/index.php/Southeastern_Philippines_Journal/article/view/455/143",
+  },
+]
 
-export default function ProjectsPage() {
+export default function PublicationsPage() {
   return (
-    <div className="flex flex-col ml-10 mr-10">
-      <div className="flex justify-center items-center text-center">
-        <div className="flex flex-col w-full">
-          <Label className="font-bold text-lg bg-red-300 text-center">
-            AAVC Phase 1:
-            Enhancing the Value Chain Project Designs for Coffee, Cacao, and Cavendish Banana Towards the Development of Agri-Aqua Value Chain Laboratory in UP Mindanao
-          </Label>
-
-          <Label className="p-2 text-justify">
-            This program will contribute to new ways of evaluation that account
-            for the dynamics in the chain and develop models to aid
-            decision-making and develop more effective upgrading strategies
-            considering emerging and critical concerns like sustainability,
-            resiliency, and inclusiveness. Build on the findings of previous
-            initiatives of UP Mindanao related to cacao, coffee, and cavendish
-            banana. Based on the program’s findings, a framework for other
-            commodity chains may be established and used as the basis for
-            intervention. Institutional innovation can be developed for
-            developing effective link of value chain design and implementation
-            (e.g., VC Lab). Innovative ways to evaluate value chains will be
-            introduced including:
-            <ul className="list-disc ml-6 mt-2">
-              <li>Agent-based modeling</li>
-              <li>Supply chain network designs (SCND)</li>
-              <li>Agri-food chain applications for decision-making (i.e., prototype mobile apps)</li>
-              <li>Improve on existing upgrading strategies</li>
-            </ul>
-          </Label>
-        </div>
-      </div>
-      <div className="w-full flex justify-center items-center">
-      <Accordion type="single" collapsible>
-        {/* Project 1 */}
-        <AccordionItem value="item-1">
-   
-          <AccordionTrigger>
-            {/* Icon for Project 1 */}
-            <ChartArea className="mr-2 h-4 w-4" />
-           <h1 className=" text-lg"> Project 1: Value Chain Analysis and Development: Cacao, Coffee, and Cavendish Banana</h1>
-          </AccordionTrigger>
-      
-         
-          <AccordionContent>
-            For the three chains, updating includes utilizing previous survey
-            data to examine the role of consolidation and clusters. Factors
-            affecting the decision to cluster will be examined using a logit
-            model. A technical efficiency model will also be estimated to
-            analyze the role of clusters in enhancing efficiency. A new survey
-            will be conducted for cacao which will be used in agent-based
-            modelling in component 2 as well as in the analysis of clusters.
-            Training and workshops on value chain analysis and development will
-            be conducted for a selected group of researchers and practitioners.
-            Stakeholder workshops will also be conducted to present research
-            outputs. These capacity-building activities and stakeholder
-            engagement form part and parcel of developing a value chain
-            laboratory for the agri-food sector.
-
-            {/* Tabs for Present & Former Members */}
-            <div className="mt-6">
-              <Tabs defaultValue="present">
-                <TabsList className="flex space-x-4 border-none shadow-none bg-transparent">
-                  <TabsTrigger
-                    value="present"
-                    className="focus:outline-none focus:shadow-none data-[state=active]:bg-slate-100"
-                  >
-                    Present Members
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="former"
-                    className="focus:outline-none focus:shadow-none data-[state=active]:bg-slate-100"
-                  >
-                    Former Members
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent
-                  value="present"
-                  className="mt-4 p-4 rounded shadow-sm bg-white"
-                >
-                  <h3 className="text-lg font-semibold mb-2">Present Project Team</h3>
-                
-                </TabsContent>
-
-                <TabsContent
-                  value="former"
-                  className="mt-4 p-4 rounded shadow-sm bg-white"
-                >
-                  <h3 className="text-lg font-semibold mb-2">Former Project Team</h3>
-                  
-                </TabsContent>
-              </Tabs>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        {/* Project 2 */}
-        <AccordionItem value="item-2">
-          <AccordionTrigger>
-            {/* Icon for Project 2 */}
-            <Cpu className="mr-2 h-4 w-4" />
-            <h1 className=" text-lg"> Project 2: Value Chain Modelling and Simulations: Cacao, Coffee, and Cavendish Banana</h1>
-           
-          </AccordionTrigger>
-        
-          <AccordionContent>
-            This project aims to develop models of agri-food value chains that
-            will aid decision-making and evaluation of the chain. This project
-            will focus on developing models of at most three chains: Cavendish
-            banana, coffee, and cacao. Studying these value chains in UP
-            Mindanao is not new. However, this project aims to incorporate the
-            data gathered from previous studies (CHED-funded study on Cavendish
-            banana value chain; DOST-PCIEERD-funded project on the coffee value
-            chain; CHED-funded and PCARRD-UP Mindanao-funded projects for cacao
-            value chain) to develop further models that will support in the
-            improvement of the studied chains.
-          </AccordionContent>
-          <AccordionContent>
-            {/* Tabs for Present & Former Members */}
-            <div className="mt-6">
-              <Tabs defaultValue="present">
-                <TabsList className="flex space-x-4 border-none shadow-none bg-transparent">
-                  <TabsTrigger
-                    value="present"
-                    className="focus:outline-none focus:shadow-none data-[state=active]:bg-slate-100"
-                  >
-                    Present Members
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="former"
-                    className="focus:outline-none focus:shadow-none data-[state=active]:bg-slate-100"
-                  >
-                    Former Members
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent
-                  value="present"
-                  className="mt-4 p-4 rounded shadow-sm bg-white"
-                >
-                  <h3 className="text-lg font-semibold mb-2">Present Project Team</h3>
-                  
-                </TabsContent>
-
-                <TabsContent
-                  value="former"
-                  className="mt-4 p-4 rounded shadow-sm bg-white"
-                >
-                  <h3 className="text-lg font-semibold mb-2">Former Project Team</h3>
-                 
-                </TabsContent>
-              </Tabs>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        {/* Project 3 */}
-        <AccordionItem value="item-3">
-          <AccordionTrigger>
-            {/* Icon for Project 3 */}
-            <Database className="mr-2 h-4 w-4" />
-            <h1 className=" text-lg">Project 3: Data analytics for the Cacao, Coffee, and Cavendish Banana Value Chains</h1>
-            
-          </AccordionTrigger>
-           
-          <AccordionContent>
-            This project covers the data analytics component of the proposed
-            program. It will build on the updated analysis of the banana
-            (Cavendish banana), cacao, and coffee value chains by developing
-            decision support platform based on an analysis of issues in the
-            value chains, previous outputs of mathematical models (e.g., SCND),
-            previous technologies developed (e.g., Kape Analytics), and data
-            analytics modules for selected crops. The technologies will be
-            tested and built as a validated prototype. The prototype testing
-            will include testing with small-scale farmers of the selected crops
-            to validate model results and ease of use of the application. The
-            capacity building activities will be based on the user manual of
-            the application featuring how it provides insights for
-            decision-making at the farm-level. Trainings and workshops will be
-            conducted for its users. Technology pitch can be created to drum up
-            investment support from potential investors. The stakeholder
-            workshops will be a venue to present the capabilities of the
-            prototype to gain interest and possible future investments from
-            government or the private sector. The prototype(s) can also further
-            be developed as a commercial technology through incubator programs.
-            Project 3 will contribute to the large gap in A4.0 technologies in
-            the three selected commodities.
-          </AccordionContent>
-          <AccordionContent>
-            {/* Tabs for Present & Former Members */}
-            <div className="mt-6">
-              <Tabs defaultValue="present">
-                <TabsList className="flex space-x-4 border-none shadow-none bg-transparent">
-                  <TabsTrigger
-                    value="present"
-                    className="focus:outline-none focus:shadow-none data-[state=active]:bg-slate-100"
-                  >
-                    Present Members
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="former"
-                    className="focus:outline-none focus:shadow-none data-[state=active]:bg-slate-100"
-                  >
-                    Former Members
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent
-                  value="present"
-                  className="mt-4 p-4 rounded shadow-sm bg-white"
-                >
-                  <h3 className="text-lg font-semibold mb-2">Present Project Team</h3>
-                 
-                </TabsContent>
-
-                <TabsContent
-                  value="former"
-                  className="mt-4 p-4 rounded shadow-sm bg-white"
-                >
-                  <h3 className="text-lg font-semibold mb-2">Former Project Team</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                    {[
-                      { name: "Dr. Juan Dela Cruz", role: "Former Project Leader" },
-                      { name: "Ms. Anna Lopez", role: "Former Research Assistant" },
-                      { name: "Mr. Pedro Santos", role: "Former Project Staff" },
-                      { name: "Ms. Marie Fernandez", role: "Former Project Staff" },
-                    ].map((member, index) => (
-                      <div key={index} className="flex flex-col items-center text-center">
-                        <Image
-                          src="/former_member.jpg"
-                          alt={member.name}
-                          width={120}
-                          height={120}
-                          className="rounded-full object-cover"
-                        />
-                        <p className="font-semibold mt-2">{member.name}</p>
-                        <p className="text-sm text-gray-500">{member.role}</p>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+    <div className="container mx-auto py-10">
+      <h1 className="text-3xl font-bold mb-8">Publications</h1>
+      <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
+        {publications.map((publication, index) => (
+          <Card key={index} className="overflow-hidden">
+            <CardHeader>
+              <CardTitle className="text-xl">{publication.title}</CardTitle>
+              <div className="flex flex-wrap gap-2 mt-2">
+                <Badge variant="outline">{publication.type}</Badge>
+                <Badge variant="secondary">{publication.technology}</Badge>
+                <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                  {publication.crop}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm font-medium text-muted-foreground mb-4">{publication.authors}</p>
+              <p className="text-sm text-muted-foreground">{publication.abstract}</p>
+            </CardContent>
+            <CardFooter>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <Link href={publication.link} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                  View Full Paper <ExternalLink className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
     </div>
   )

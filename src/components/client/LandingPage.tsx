@@ -14,14 +14,13 @@ export default function LandingPage() {
           {/* Left Text */}
           <div className="md:w-1/2">
             <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-              Establishing and Operationalizing the <br />
+             
               Agri-Aqua Value Chain Laboratory
             </h1>
             <p className="mt-4 text-gray-700 text-lg">
-              A dedicated facility at UP Mindanao, funded by DOST-PCAARRD, to foster 
-              <strong> research, innovation, and capacity-building</strong> in Agri-Aqua 
-              value chains. Join us as we drive <strong>interdisciplinary collaboration</strong>, 
-              shaping sustainable and inclusive agri-aqua development.
+            Empowering communities through innovation for sustainable agri-aqua futures.
+
+              
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white">

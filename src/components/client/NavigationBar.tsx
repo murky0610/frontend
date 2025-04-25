@@ -52,13 +52,38 @@ interface UserDetail {
 const components = [
   { title: "What We Do", href: "/about-us/what-we-do" },
   { title: "Who We Are", href: "/about-us/who-we-are" },
-  { title: "Our Collaborators", href: "/about-us/collaborators" },
+  { title: "Research and Development", href: "/about-us/research-development" },
+  { title: "Partnerships and Linkages", href: "/about-us/partnership-linkages" },
+
 ]
 
-const features = [
-  { title: "Cost Calculator", href: "/docs/primitives/alert-dialog" },
-  { title: "MPO", href: "/docs/primitives/hover-card" },
-]
+const services = [
+  {
+    title: "Mobile App",
+    href: "/services/mobile-app", // Example parent link for the overall Mobile App section
+    children: [ // First level children: Coffee and Cacao
+      {
+        title: "Coffee",
+        href: "/services/mobile-app/coffee", // Link for the Coffee Mobile App section (optional)
+        children: [ // Second level children: Cost Calculator and MPO for Coffee
+          { title: "Cost Calculator", href: "/services/mobile-app/coffee/cost-calculator" },
+          { title: "Market Profit Optimizer", href: "/services/mobile-app/coffee/mpo" },
+        ]
+      },
+      {
+        title: "Cacao",
+        href: "/services/mobile-app/cacao", // Link for the Cacao Mobile App section (optional)
+        children: [ // Second level children: Cost Calculator and MPO for Cacao
+          { title: "Cost Calculator", href: "/services/mobile-app/cacao/cost-calculator" },
+          { title: "Market Profit Optimizer", href: "/services/mobile-app/cacao/mpo" },
+        ]
+      },
+    ]
+  },
+  { title: "Repository", href: "/services/repository" },
+  { title: "Directory", href: "/services/directory" },
+  // Note: Cost Calculator and MPO are now nested within Coffee and Cacao under Mobile App
+];
 
 export default function NavigationMenuDemo() {
   const router = useRouter();
@@ -123,8 +148,9 @@ export default function NavigationMenuDemo() {
   return (
 <div className="w-full flex items-center justify-between px-12 py-4 bg-white border-b border-gray-200">
 {/* Left Logo / Brand */}
-    <Link href="/">
-      <div className="flex items-center gap-2 cursor-pointer">
+<div className="flex items-center gap-2 cursor-pointer">
+    <Link href="/home" legacyBehavior>
+
         <Image
           src="/VC Lab Logo PNG.png" // Replace with your brand logo
           alt="AAVC Logo"
@@ -132,9 +158,9 @@ export default function NavigationMenuDemo() {
           height={50}
           className="object-contain"
         />
-      </div>
+  
     </Link>
-
+    </div>
     {/* Center Nav Menu */}
     <NavigationMenu>
     <NavigationMenuList className="flex items-center space-x-4 text-black">
@@ -146,40 +172,98 @@ export default function NavigationMenuDemo() {
       <ul className="grid w-[300px] gap-3 p-4 text-gray-700">
         {components.map((component) => (
           <li key={component.title}>
-            <Link href={component.href}>
-              <div className="text-sm hover:underline">{component.title}</div>
+            <div className="text-sm hover:underline">
+            <Link href={component.href} legacyBehavior>
+              {component.title}
             </Link>
+            </div>
           </li>
         ))}
       </ul>
     </NavigationMenuContent>
   </NavigationMenuItem>
+          {/* Add mobile apps menu content */}
+   
+<NavigationMenuItem>
+  <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
+    Services
+  </NavigationMenuTrigger>
+  <NavigationMenuContent>
+    {/* Adjusted grid width if needed, but main change is list structure */}
+    {/* Removed grid classes here to allow list items to control width based on content/indentation */}
+    <ul className="w-[300px] gap-3 p-4"> {/* Removed grid classes, using basic ul/li structure */}
+      {services.map((service) => (
+        // Use React.Fragment to render multiple list items for parent and children
+        <React.Fragment key={service.title}>
+          {/* Render the top-level item (e.g., Mobile App, Repository, Directory) */}
+          <li>
+            <Link href={service.href} passHref legacyBehavior> {/* Use passHref with Link inside components */}
+              {/* You might use NavigationMenuLink here for shadcn styling */}
+              {/* Style top-level parents */}
+              <div className="text-sm font-semibold hover:underline">
+                  {service.title}
+              </div>
+            </Link>
+          </li>
 
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="hover:text-gray-600 transition-colors">
-            Services
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[300px] gap-3 p-4">
-              {features.map((feature) => (
-                <li key={feature.title}>
-                  <Link href={feature.href}>
-                    <div className="text-sm hover:underline">{feature.title}</div>
-                  </Link>
+          {/* Render the first level children (e.g., Coffee, Cacao) if they exist */}
+          {service.children && service.children.map((firstLevelChild) => (
+            <React.Fragment key={firstLevelChild.title}>
+              {/* Render the first level child item */}
+              <li className="ml-4"> {/* Add margin-left for first level indentation */}
+                 {/* Decide if this is a link or just a visual heading */}
+                 {/* Rendering as a link based on the data structure having href */}
+                 <Link href={firstLevelChild.href} passHref legacyBehavior> {/* Use passHref */}
+                   {/* Style first-level children */}
+                   <div className="text-sm font-medium hover:underline"> {/* Slightly less bold than parent */}
+                       {firstLevelChild.title}
+                   </div>
+                 </Link>
+              </li>
+
+              {/* Render the second level children (e.g., Cost Calculator, MPO) if they exist */}
+              {firstLevelChild.children && firstLevelChild.children.map((secondLevelChild) => (
+                <li key={secondLevelChild.title} className="ml-8"> {/* Add more margin-left for second level indentation */}
+                   <Link href={secondLevelChild.href} passHref legacyBehavior> {/* Use passHref */}
+                     {/* Style second-level children */}
+                     <div className="text-sm hover:underline"> {/* Standard text for the final links */}
+                         {secondLevelChild.title}
+                     </div>
+                   </Link>
                 </li>
               ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+            </React.Fragment>
+          ))}
+        </React.Fragment>
+      ))}
+    </ul>
+  </NavigationMenuContent>
+</NavigationMenuItem>
 
         <NavigationMenuItem>
           <Link href="/projects" passHref legacyBehavior>
             <NavigationMenuLink className="hover:text-gray-600 transition-colors">
-              Projects
+              Published Papers
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-
+              {/* Add Later */}
+              {/* for news page */}
+        {/* <NavigationMenuItem>
+          <Link href="/news" passHref legacyBehavior>
+            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+              News
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem> */}
+        {/* For publications page */}
+               {/* <NavigationMenuItem>
+          <Link href="/publications" passHref legacyBehavior>
+            <NavigationMenuLink className="hover:text-gray-600 transition-colors">
+              Publications
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <Link href="/contact-us" passHref legacyBehavior>
             <NavigationMenuLink className="hover:text-gray-600 transition-colors">
@@ -232,11 +316,11 @@ export default function NavigationMenuDemo() {
         </DropdownMenu>
       ) : (
         <div className="flex items-center space-x-2">
-          <Link href="/login" className="text-gray-700 hover:underline">
+          <Link href="/login" className="text-gray-700 hover:underline" legacyBehavior>
             Sign In
           </Link>
           <Button variant="outline" asChild>
-            <Link href="/register">Sign Up</Link>
+            <Link href="/register" legacyBehavior>Sign Up</Link>
           </Button>
         </div>
       )}
@@ -322,6 +406,7 @@ const ListItem = React.forwardRef<
             className
           )}
           {...props}
+          legacyBehavior
         >
           <div className="text-sm font-medium leading-none">{title}</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
