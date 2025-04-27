@@ -11,7 +11,7 @@ import { Scale, BookOpen, GraduationCap, Boxes, HandCoins, Cpu, Coffee, Banana, 
 import { Separator } from "@/components/ui/separator";
 import { RepositoryInterface } from "@/interface/repository.interface";
 import { Input } from "@/components/ui/input";
-import RepositoryFilterSearch from "@/components/client/RepositoryFilterSearch";
+import RepositoryFilterSearch from "../interaction-elements/RepositoryFilterSearch";
 import Link from "next/link";
 
 const categoryIcons = {
