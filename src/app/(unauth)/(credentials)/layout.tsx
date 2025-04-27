@@ -5,12 +5,9 @@ export default function CredentialLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body  
-      >   
+  <div>
      
         {children}
-      </body>
-    </html>
+    </div>
   );
 }
