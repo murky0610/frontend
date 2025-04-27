@@ -1,19 +1,16 @@
+import Link from "next/link";
+import { Button } from "../ui/button";
+
 export default function AboutUsVissionMission() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center bg-gradient-to-r from-emerald-800 to-teal-700 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="grid grid-cols-3 h-full">
-  
-          </div>
+      <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 py-6">
+        <div className="container mx-auto px-4">
+          <h1 className="text-white text-3xl font-bold">What We Do</h1>
+          <div className="h-1 w-full bg-white/20 mt-2"></div>
         </div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            About Us
-          </h1>
-        </div>
-      </section>
+      </div>
 
       {/* Mission & Vision Section */}
       <section className="py-20 bg-white">
@@ -137,35 +134,38 @@ export default function AboutUsVissionMission() {
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">CORE VALUES</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <div className="bg-purple-50 rounded-lg p-6 text-center shadow-md transform transition-transform hover:scale-105">
+            <div className="bg-purple-50 rounded-lg p-6 text-center shadow-md transform">
               <h3 className="text-xl font-bold text-purple-800">Inclusive</h3>
             </div>
-            <div className="bg-blue-50 rounded-lg p-6 text-center shadow-md transform transition-transform hover:scale-105">
+            <div className="bg-blue-50 rounded-lg p-6 text-center shadow-md transform">
               <h3 className="text-xl font-bold text-blue-800">Excellence</h3>
             </div>
-            <div className="bg-cyan-50 rounded-lg p-6 text-center shadow-md transform transition-transform hover:scale-105">
+            <div className="bg-cyan-50 rounded-lg p-6 text-center shadow-md transform">
               <h3 className="text-xl font-bold text-cyan-800">Innovative</h3>
             </div>
-            <div className="bg-teal-50 rounded-lg p-6 text-center shadow-md transform transition-transform hover:scale-105">
+            <div className="bg-teal-50 rounded-lg p-6 text-center shadow-md transform">
               <h3 className="text-xl font-bold text-teal-800">Service Oriented</h3>
             </div>
-            <div className="bg-green-50 rounded-lg p-6 text-center shadow-md transform transition-transform hover:scale-105">
+            <div className="bg-green-50 rounded-lg p-6 text-center shadow-md transform">
               <h3 className="text-xl font-bold text-green-800">Committed</h3>
             </div>
-            <div className="bg-emerald-50 rounded-lg p-6 text-center shadow-md transform transition-transform hover:scale-105">
+            <div className="bg-emerald-50 rounded-lg p-6 text-center shadow-md transform">
               <h3 className="text-xl font-bold text-emerald-800">Collaborative</h3>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Guiding Principles Section */}
+
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">Services Offered</h2>
           <div className="grid md:grid-cols-4 gap-8">
-            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-amber-500 transform transition-all hover:shadow-xl">
-              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+
+            <Link href="/home">
+            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-teal-500 transform transition-transform hover:scale-105 hover:shadow-xl flex flex-col justify-between h-full">
+              <div>
+             <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg
                   className="w-8 h-8 text-amber-600"
                   fill="none"
@@ -185,9 +185,17 @@ export default function AboutUsVissionMission() {
               <p className="text-gray-600 text-center">
               Join our hands-on trainings, workshops, and bootcamps to enhance your skills and knowledge in disease surveillance, analytics, and public health. Our interactive sessions are designed to equip you with practical tools and techniques that you can apply in real-world scenarios
               </p>
+              </div>
+              <div className="flex justify-end mt-6">
+     
+              <Button>
+                Learn More
+              </Button>
             </div>
-
-            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-emerald-500 transform transition-all hover:shadow-xl">
+            </div>
+            </Link>
+            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-teal-500 transform transition-transform hover:scale-105 hover:shadow-xl flex flex-col justify-between h-full">
+              <div>
               <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg
                   className="w-8 h-8 text-emerald-600"
@@ -208,9 +216,16 @@ export default function AboutUsVissionMission() {
               <p className="text-gray-600 text-center">
               Mobile apps such as Market Profit Optimizer and Cost Calculator for commodities of Cacao, Coffee, and Cavendish Banana
               </p>
+              </div>
+              <div className="flex justify-end mt-6">
+              <Button>
+                <Link href="/services/mobile-apps"> Learn More </Link>
+              </Button>
+            </div>
             </div>
 
-            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-teal-500 transform transition-all hover:shadow-xl">
+            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-teal-500 transform transition-transform hover:scale-105 hover:shadow-xl flex flex-col justify-between h-full">
+              <div>
               <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg
                   className="w-8 h-8 text-teal-600"
@@ -231,9 +246,16 @@ export default function AboutUsVissionMission() {
               <p className="text-gray-600 text-center">
                 Repository kay about para makita ang mga papers or something like that about VC Chain studies
               </p>
+              </div>
+              <div className="flex justify-end mt-6">
+              <Button>
+              <Link href="/services/repository"> Learn More </Link>
+              </Button>
+            </div>
             </div>
             
-            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-teal-500 transform transition-all hover:shadow-xl">
+            <div className="bg-white rounded-xl p-8 shadow-lg border-t-4 border-teal-500 transform transition-transform hover:scale-105 hover:shadow-xl flex flex-col justify-between h-full">
+            <div>
               <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg
                   className="w-8 h-8 text-teal-600"
@@ -255,6 +277,14 @@ export default function AboutUsVissionMission() {
                 Directory kay para makita ang location and information sa Farmers and Buyers Via Mapping 
               </p>
             </div>
+            
+            <div className="flex justify-end mt-6">
+              <Button>
+              <Link href="/services/directory"> Learn More </Link>
+              </Button>
+            </div>
+          </div>
+
           </div>
           
     

@@ -10,18 +10,12 @@ export default function AboutUsProjectsComponent() {
     <div className="w-full max-w-6xl mx-auto py-12 px-4 sm:px-6">
       
       <div className="space-y-12">
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center bg-gradient-to-r from-emerald-800 to-teal-700 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="grid grid-cols-3 h-full">
-  
-          </div>
+      <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 py-6">
+        <div className="container mx-auto px-4">
+          <h1 className="text-white text-3xl font-bold">Research and Development</h1>
+          <div className="h-1 w-full bg-white/20 mt-2"></div>
         </div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Research and
-          </h1>
-        </div>
-      </section>
+      </div>
         {/* Header Section */}
         <div className="text-center space-y-4">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Phase 1</h1>
@@ -127,13 +121,14 @@ export default function AboutUsProjectsComponent() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                       {/* Member 1 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Digal.png"
                             alt="Dr. Larry N. Digal"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Dr. Larry N. Digal</p>
@@ -142,13 +137,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 2 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Placencia.png"
                             alt="Asst. Prof. Shemaiah Gail Placencia"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Asst. Prof. Shemaiah Gail Placencia</p>
@@ -157,13 +153,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 3 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Balgos.png"
                             alt="Ms. Carol Balgos"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Ms. Carol Balgos</p>
@@ -172,13 +169,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 4 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Jgarcia.jpg"
                             alt="Ms. Jo-an Garcia"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Ms. Jo-an Garcia</p>
@@ -187,13 +185,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 5 */}
                       <div className="flex flex-col items-center text-center group col-span-full">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Saguimpa.jpg"
                             alt="Mark James S. Saguimpa"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Mark James S. Saguimpa</p>
@@ -240,13 +239,14 @@ export default function AboutUsProjectsComponent() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                       {/* Member 1 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Oguis.jpg"
                             alt="Dr. Giovanna Fae Oguis"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Dr. Giovanna Fae Oguis</p>
@@ -255,13 +255,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 2 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Rosero.jpg"
                             alt="El Veena Grace Rosero"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">El Veena Grace Rosero</p>
@@ -270,13 +271,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 3 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Rivas.jpg"
                             alt="Novy Aila Rivas"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Novy Aila Rivas</p>
@@ -330,13 +332,14 @@ export default function AboutUsProjectsComponent() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                       {/* Member 1 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Santillan.jpg"
                             alt="Jon Henly O. Santillan"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Jon Henly O. Santillan</p>
@@ -345,13 +348,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 2 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Palen.jpg"
                             alt="Jeff Erxon Palen"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Jeff Erxon Palen</p>
@@ -360,13 +364,14 @@ export default function AboutUsProjectsComponent() {
 
                       {/* Member 3 */}
                       <div className="flex flex-col items-center text-center group">
-                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
+                        <div className="relative mb-3 overflow-hidden rounded-full border-4 border-emerald-100 transition-all duration-300 group-hover:border-emerald-300 w-[120px] h-[120px]">
                           <Image
-                            src="/placeholder.svg?height=120&width=120"
+                            src="/Staff Pictures/Labanon.jpg"
                             alt="Alex John Labanon"
                             width={120}
                             height={120}
-                            className="rounded-full object-cover"
+                            className="rounded-full object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
                           />
                         </div>
                         <p className="font-semibold">Alex John Labanon</p>
