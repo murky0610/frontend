@@ -68,7 +68,12 @@ const publications = [
 export default function PublicationsPage() {
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-8">Publications</h1>
+         <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Published Papers</h1>
+          <p className="text-muted-foreground max-w-3xl mx-auto">
+          Explore the papers we've published and the impact we're making across fields.
+          </p>
+        </div>
       <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
         {publications.map((publication, index) => (
           <Card key={index} className="overflow-hidden">
