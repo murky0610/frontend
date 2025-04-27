@@ -166,22 +166,6 @@ export function ContactUsSection() {
               </div>
 
               <Separator />
-
-              <div className="pt-2">
-                <div className="aspect-video relative rounded-lg overflow-hidden border border-gray-200">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.5800628018716!2d125.4896491!3d7.0599722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f90e2c5c5d6e3f%3A0x90c94d405c4c7f25!2sUniversity%20of%20the%20Philippines%20Mindanao!5e0!3m2!1sen!2sph!4v1714026781201!5m2!1sen!2sph"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={false}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="UP Mindanao Location"
-                    className="absolute inset-0"
-                  ></iframe>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>
