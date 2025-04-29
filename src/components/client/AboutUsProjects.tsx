@@ -18,6 +18,7 @@ export default function AboutUsProjectsComponent() {
       </div>
         {/* Header Section */}
         <div className="text-center space-y-4">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Completed  Projects</h1>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Phase 1</h1>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Enhancing the Value Chain Project</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -383,6 +384,8 @@ export default function AboutUsProjectsComponent() {
               </Card>
             </TabsContent>
           </Tabs>
+                       
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Ongoing  Projects</h1>
         </div>
       </div>
     </div>
