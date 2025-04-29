@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import Footer from "@/components/interaction-elements/Footer";
 import "./globals.css";
 //import { Toaster } from "@/components/ui/sonner";
 export const metadata: Metadata = {
@@ -19,6 +19,7 @@ export default function RootLayout({
       >       
         {children}
         {/* <Toaster /> */}
+        <Footer/>
       </body>
     </html>
   );
