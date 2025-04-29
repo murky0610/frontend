@@ -1,70 +1,75 @@
-import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { HandshakeIcon, LinkIcon } from "lucide-react"
+import Image from "next/image";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// Added PhoneIcon and MailIcon
+import { HandshakeIcon, LinkIcon, PhoneIcon, MailIcon } from "lucide-react";
 
 export function PartnershipAndLinkagesComponent() {
   const partners = [
-        {
-          name: "Brgy. Kidawa, Laak, Davao de Oro",
-          contact: {
-              phone: "(Information typically obtained through the Municipality of Laak)",
-              email: "(Information typically obtained through the Municipality of Laak)"
-          }
-        },
-        {
-          name: "Davao de Oro State College (DDOSC)",
-          // Note: Logo URL needs verification from the official site at time of use. Assuming a standard location.
-          logo: "/Partners Logo/davao-de-oro-logo.jpg", 
-          website: "https://ddosc.edu.ph/",
-          contact: {
-              phone: "(084) 829 0284 / +63 917-127-0418 / +63 919-084-8955", // Verify numbers from site
-              email: "info@ddosc.edu.ph" // Verify email from site
-          }
-        },
-        {
-          name: "Davao Oriental State University (DOrSU)",
-          // Note: Logo URL needs verification from the official site at time of use. Assuming a standard location.
-           logo: "/Partners Logo/dorsu-logo.jpg", 
-          website: "https://dorsu.edu.ph/",
-          contact: {
-              phone: "(087) 811-4079 / (087) 388-3207", // Verify numbers from site
-              email: "op@dorsu.edu.ph" // Verify email from site (President's office, find general if available)
-          }
-        },
-        {
-          name: "UPLB SARAI Project",
-          // Note: Logo URL needs verification from the official site at time of use.
-                logo: "/Partners Logo/upscale-sarai-logo.png", 
-          website: "https://sarai.ph/",
-          contact: {
-              phone: "+63 49 536 3080", // Verify number from site
-              email: "projectsarai@up.edu.ph" // Verify email from site
-          }
-        },
-        {
-          name: "UP Mindanao – Land Reservation Management Office (LRMO)",
-          logo: "/Partners Logo/upmin-logo.png", 
-          website: "https://www.upmin.edu.ph/", // Link to main UP Mindanao website
-          contact: {
-              // Specific LRMO public contact might not be listed. Providing general UPMin contact.
-              phone: "(082) 293-0302 / (082) 293-0084", // UPMin Trunkline, verify numbers
-              email: "ovca.upmindanao@up.edu.ph" // General Admin email, verify appropriate contact
-          }
-        },
-        {
-          name: "World Agroforestry – International Centre for Research in Agroforestry (ICRAF)",
-          // Note: Logo URL needs verification from the official site at time of use.
-          logo: "/Partners Logo/cifor-icraf-logo.png", 
-          website: "https://www.worldagroforestry.org/",
-          contact: {
-              // Providing general contact and Philippines office if available.
-              phone: "+63 49 536 2701", // ICRAF Philippines (Los Baños), verify number
-              email: "icraf-philippines@cifor-icraf.org" // ICRAF Philippines email, verify address
-          }
-        },
-     ]
+    {
+      name: "Brgy. Kidawa, Laak, Davao de Oro",
+      contact: {
+        // These are just placeholder strings indicating information isn't directly available here
+        phone: "(Information typically obtained through the Municipality of Laak)",
+        email: "(Information typically obtained through the Municipality of Laak)"
+      },
+      // No logo or website for this entry in the data
+    },
+    {
+      name: "Davao de Oro State College (DDOSC)",
+      logo: "/Partners Logo/davao-de-oro-logo.jpg",
+      website: "https://ddosc.edu.ph/",
+      contact: {
+        phone: "(084) 829 0284 / +63 917-127-0418 / +63 919-084-8955",
+        email: "info@ddosc.edu.ph"
+      }
+    },
+    {
+      name: "Davao Oriental State University (DOrSU)",
+      logo: "/Partners Logo/dorsu-logo.jpg",
+      website: "https://dorsu.edu.ph/",
+      contact: {
+        phone: "(087) 811-4079 / (087) 388-3207",
+        email: "op@dorsu.edu.ph"
+      }
+    },
+    {
+      name: "UPLB SARAI Project",
+      logo: "/Partners Logo/upscale-sarai-logo.png",
+      website: "https://sarai.ph/",
+      contact: {
+        phone: "+63 49 536 3080",
+        email: "projectsarai@up.edu.ph"
+      }
+    },
+    {
+      name: "UP Mindanao – Land Reservation Management Office (LRMO)",
+      logo: "/Partners Logo/upmin-logo.png",
+      website: "https://www.upmin.edu.ph/",
+      contact: {
+        phone: "(082) 293-0302 / (082) 293-0084",
+        email: "ovca.upmindanao@up.edu.ph"
+      }
+    },
+    {
+      name: "World Agroforestry – International Centre for Research in Agroforestry (ICRAF)",
+      logo: "/Partners Logo/cifor-icraf-logo.png",
+      website: "https://www.worldagroforestry.org/",
+      contact: {
+        phone: "+63 49 536 2701",
+        email: "icraf-philippines@cifor-icraf.org"
+      }
+    },
+  ];
 
+  // Helper to check if contact info is just the placeholder string
+  const isPlaceholderContact = (contact: {
+      // These are just placeholder strings indicating information isn't directly available here
+      phone: string; email: string;
+    }) =>
+    contact &&
+    contact.phone && contact.phone.includes("Information typically obtained") &&
+    contact.email && contact.email.includes("Information typically obtained");
 
 
   return (
@@ -78,36 +83,80 @@ export function PartnershipAndLinkagesComponent() {
         </div>
 
         <Tabs defaultValue="partners" className="w-full">
-
+          {/* Add TabsList and Triggers here if you plan to add other tabs */}
+          {/* <TabsList>
+            <TabsTrigger value="partners">Partners</TabsTrigger>
+             Add other triggers if needed
+           </TabsList> */}
 
           <TabsContent value="partners" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {partners.map((partner, index) => (
-                <Card key={index} className="overflow-hidden">
-                  <CardHeader className="pb-2">
+                // Use flex-col to structure the card content vertically
+                <Card key={index} className="overflow-hidden flex flex-col">
+                  <CardHeader className="pb-2 flex-grow-0"> {/* flex-grow-0 keeps header height based on content */}
                     <div className="flex items-center gap-4">
-                      <div className="relative h-16 w-16 rounded-md overflow-hidden bg-muted flex items-center justify-center">
-                        <Image
-                          src={partner.logo || "/placeholder.svg"}
-                          alt={`${partner.name} logo`}
-                          fill
-                          className="object-contain p-2"
-                        />
+                      {/* Logo Placeholder/Image */}
+                      <div className="relative h-16 w-16 rounded-md overflow-hidden bg-muted flex items-center justify-center flex-shrink-0">
+                        {partner.logo ? (
+                          <Image
+                            src={partner.logo}
+                            alt={`${partner.name} logo`}
+                            fill
+                            className="object-contain p-2" // Add padding to logo
+                          />
+                        ) : (
+                          // Show a default icon if no logo is provided
+                          <HandshakeIcon size={30} className="text-muted-foreground" />
+                        )}
                       </div>
-                      <div>
-                        <CardTitle className="text-lg">{partner.name}</CardTitle>
-                        <CardDescription>{partner.contact.phone}</CardDescription>
-                        <CardDescription>{partner.contact.email}</CardDescription>
-                      </div>
+                      {/* Partner Name */}
+                      {/* Use CardTitle for the main name, allow flex-grow to take space */}
+                      <CardTitle className="text-lg leading-snug flex-grow">{partner.name}</CardTitle>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center">
-                      <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        {partner.website}
-                      </span>
-                    </div>
-                  </CardContent>
+
+                  {/* CardContent for Contact Info - Only render if real contact info exists */}
+                  {partner.contact && !isPlaceholderContact(partner.contact) && (
+                    <CardContent className="pt-2 space-y-1 text-sm text-muted-foreground flex-grow-0"> {/* pt-2 adds spacing from header */}
+                      {partner.contact.phone && !partner.contact.phone.includes("Information typically obtained") && (
+                        <div className="flex items-center gap-2"> {/* Added gap for icon */}
+                          <PhoneIcon size={14} className="flex-shrink-0 text-gray-500" /> {/* Added icon and styling */}
+                          <span>{partner.contact.phone}</span>
+                        </div>
+                      )}
+                      {partner.contact.email && !partner.contact.email.includes("Information typically obtained") && (
+                        <div className="flex items-center gap-2"> {/* Added gap for icon */}
+                          <MailIcon size={14} className="flex-shrink-0 text-gray-500" /> {/* Added icon and styling */}
+                          <span>{partner.contact.email}</span>
+                        </div>
+                      )}
+                    </CardContent>
+                  )}
+
+                  {/* CardContent for Website Link - Only render if website exists */}
+                  {partner.website && (
+                    // Use flex-grow to push the website link down in cards with less content
+                    <CardContent className="pt-2 flex-grow">
+                       {/* Make the website a clickable link */}
+                      <a href={partner.website} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline flex items-center gap-2">
+                        <LinkIcon size={14} className="flex-shrink-0" /> {/* Added icon */}
+                        <span>{partner.website}</span>
+                      </a>
+                    </CardContent>
+                  )}
+
+                   {/* Handle the case for partners like Brgy. Kidawa with minimal info */}
+                   {
+                     !partner.logo &&
+                     isPlaceholderContact(partner.contact) &&
+                     !partner.website && (
+                       <CardContent className="pt-2 text-sm italic text-muted-foreground flex-grow"> {/* flex-grow to take up remaining space */}
+                          Contact information available through the Municipality of Laak.
+                       </CardContent>
+                     )
+                   }
+
                 </Card>
               ))}
             </div>
@@ -115,5 +164,5 @@ export function PartnershipAndLinkagesComponent() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
