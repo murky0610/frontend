@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import DashboardComponent from "@/components/client/UserDashboard"
+import DashboardComponent from "@/components/auth/UserDashboard"
 export default function DashboardPage() {
 
 
