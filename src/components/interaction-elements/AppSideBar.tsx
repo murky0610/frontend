@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import { Calendar, SquareChartGantt, Inbox, User } from "lucide-react"
+import { Calendar, SquareChartGantt, User } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
