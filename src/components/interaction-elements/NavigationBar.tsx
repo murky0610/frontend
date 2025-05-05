@@ -57,9 +57,17 @@ const services = [
     title: "Mobile App",
     href: "/services/mobile-app", // Example parent link for the overall Mobile App section
   },
+  {title: "Research and Development", href: "/services/research-development"},
+  { title: "Capacity Building", href: "/services/capacity-building" },  
+  //{ title: "Knowledge Management", href: "" },  
+  // { title: "Repository", href: "/services/repository" },
+  // { title: "Directory", href: "/services/directory" },
+  // Note: Cost Calculator and MPO are now nested within Coffee and Cacao under Mobile App
+]
+
+const knowledgeManagements =[
   { title: "Repository", href: "/services/repository" },
   { title: "Directory", href: "/services/directory" },
-  // Note: Cost Calculator and MPO are now nested within Coffee and Cacao under Mobile App
 ]
 
 export default function NavigationMenuDemo() {
@@ -172,7 +180,12 @@ export default function NavigationMenuDemo() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href="/projects" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
-              Published Papers
+              Publications
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/knowledge-management" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
+              Knowledge Management
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
