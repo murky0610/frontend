@@ -20,7 +20,7 @@ export default function KnowledgeManagementPage() {
             <CardContent>
               <p className="text-sm text-muted-foreground">
                 Store, organize, and manage your documents, files, and digital resources in a structured environment.
-                The Repository provides version control, search capabilities, and secure access to your organization's
+                The Repository provides version control, search capabilities, and secure access to your organization&apos;s
                 knowledge base.
               </p>
             </CardContent>
@@ -38,7 +38,7 @@ export default function KnowledgeManagementPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Explore your organization's structure, find experts, and locate resources through an intuitive directory
+                Explore your organization&apos;s structure, find experts, and locate resources through an intuitive directory
                 system. The Directory service helps connect people with the right information and subject matter experts
                 across your organization.
               </p>
