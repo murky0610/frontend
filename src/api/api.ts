@@ -68,17 +68,21 @@ export const userLogin = async (email: any, password: any) => {
     }
   };
 
-export const displayMyRepositories = async() =>{
-
-  try {
-    const response = await apiClient.get('repositories');
-    return response.data;
+  export const displayMyRepositories = async() =>{
+    try {
+      // Override the default withCredentials setting for this specific call
+      // by passing a configuration object to the get method.
+      const response = await apiClient.get('repositories', {
+        withCredentials: false // Explicitly set to false for this request
+      });
+      return response.data;
+    }
+    catch(error){
+      console.error('Fetching Repositories error: ', error);
+      // Re-throw the error so the caller can handle it
+      throw error;
+    }
   }
-  catch(error){
-    console.error('Fetching Repositories error: ', error);
-    throw error;
-  }
-}
 
 export const addMyRepository = async (repository: Omit<RepositoryInterface, 'id' | 'user'>) => {
   try {

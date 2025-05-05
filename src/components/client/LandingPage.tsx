@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { BarChart3, Blocks, Boxes, ChartArea, ChevronRight, FileText, GlassWater, Microscope, Monitor, Projector, Sprout, Users } from "lucide-react";
 
 export default function LandingPage() {
   return (
@@ -14,14 +14,13 @@ export default function LandingPage() {
           {/* Left Text */}
           <div className="md:w-1/2">
             <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-              Establishing and Operationalizing the <br />
+             
               Agri-Aqua Value Chain Laboratory
             </h1>
             <p className="mt-4 text-gray-700 text-lg">
-              A dedicated facility at UP Mindanao, funded by DOST-PCAARRD, to foster 
-              <strong> research, innovation, and capacity-building</strong> in Agri-Aqua 
-              value chains. Join us as we drive <strong>interdisciplinary collaboration</strong>, 
-              shaping sustainable and inclusive agri-aqua development.
+            Empowering communities through innovation for sustainable agri-aqua futures.
+
+              
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white">
@@ -46,159 +45,288 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 2) Project Overview Section */}
-      <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Project Overview</h2>
-          <p className="text-gray-700 text-base mb-6">
-            <strong>Project Leader:</strong> A/Prof Giovanna Fae R. Oguis, Ph.D. <br />
-            <strong>Implementing Agency:</strong> University of the Philippines Mindanao <br />
-            <strong>Source of Funds:</strong> DOST – PCAARRD <br />
-            <strong>Duration:</strong> 12 Months (February 1, 2025 – January 31, 2026) <br />
-            <strong>Year 1 Budget:</strong> Php 5,000,000.00
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="p-6 border rounded-lg bg-gray-50 hover:shadow-md transition">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-green-100 text-green-600 flex items-center justify-center rounded-full mr-3 font-bold">
-                  O1
-                </div>
-                <h3 className="font-semibold text-gray-800">Physical Facility</h3>
-              </div>
-              <p className="text-sm text-gray-600">
-                Establish a state-of-the-art AAVC Lab facility for in-depth value chain 
-                research, analysis, and collaboration.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="p-6 border rounded-lg bg-gray-50 hover:shadow-md transition">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-green-100 text-green-600 flex items-center justify-center rounded-full mr-3 font-bold">
-                  O2
-                </div>
-                <h3 className="font-semibold text-gray-800">
-                  Methodology Review
-                </h3>
-              </div>
-              <p className="text-sm text-gray-600">
-                Refine and review existing supply/value chain studies, aiming to improve 
-                relevance and impact on policy-making.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="p-6 border rounded-lg bg-gray-50 hover:shadow-md transition">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-green-100 text-green-600 flex items-center justify-center rounded-full mr-3 font-bold">
-                  O3
-                </div>
-                <h3 className="font-semibold text-gray-800">Knowledge Hub</h3>
-              </div>
-              <p className="text-sm text-gray-600">
-                Serve as a hub for best practices, consolidating supply/value chain 
-                research and data for stakeholders worldwide.
-              </p>
-            </div>
-
-            {/* Card 4 */}
-            <div className="p-6 border rounded-lg bg-gray-50 hover:shadow-md transition">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-green-100 text-green-600 flex items-center justify-center rounded-full mr-3 font-bold">
-                  O4
-                </div>
-                <h3 className="font-semibold text-gray-800">
-                  Decision Support Systems
-                </h3>
-              </div>
-              <p className="text-sm text-gray-600">
-                Develop and refine apps that optimize value chain operations for 
-                improved profitability and market transactions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3) Facilities & Tools Section */}
-      <section className="bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">
-              Lab Facilities & Digital Tools
+      <section className="bg-[#f8fafc] py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Text content */}
+          <div className="space-y-6">
+            <h2 className="text-4xl font-bold text-gray-900">
+              <span className="text-green-800">AAVC</span> - Agri-Aqua Value Chain
             </h2>
-            <p className="text-gray-600 mt-2">
-              The lab offers advanced research spaces, a consolidated <em>Value Chain Repository</em>, 
-              and integrated mobile apps for data-driven decision-making.
+
+            <p className="text-lg text-gray-700 leading-relaxed">
+              The Agri-Aqua Value Chain (AAVC) represents the complete ecosystem of activities, processes, and
+              stakeholders involved in bringing agricultural and aquatic products from production to consumption.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Card */}
-            <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
-              <h3 className="font-semibold text-xl text-gray-800 mb-2">Value Chain Repository</h3>
-              <p className="text-sm text-gray-600">
-                A knowledge hub of completed VC studies, offering refined 
-                methodologies and best practices for commodities like coffee, cacao, 
-                and Cavendish banana.
-              </p>
-              <Link href="/repository" className="inline-flex items-center text-green-600 mt-2 font-semibold hover:underline">
-                Learn More
-                <ChevronRight className="ml-1 w-4 h-4" />
-              </Link>
-            </div>
 
-            {/* Right Card */}
-            <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
-              <h3 className="font-semibold text-xl text-gray-800 mb-2">DSS Mobile Applications</h3>
-              <p className="text-sm text-gray-600">
-                From cost calculators to market profit optimizers, these apps enhance 
-                profitability, efficiency, and transparency across the agri-aqua chain.
-              </p>
-              <Link href="/field-assistant" className="inline-flex items-center text-green-600 mt-2 font-semibold hover:underline">
-                View Apps
-                <ChevronRight className="ml-1 w-4 h-4" />
-              </Link>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Our integrated approach connects farmers, fishers, processors, distributors, and consumers in a
+              sustainable network that enhances food security, promotes economic growth, and ensures environmental
+              stewardship across the entire value chain.
+            </p>
+
+            <div className="pt-4 flex flex-col sm:flex-row gap-4">
+              <div className="flex items-center gap-3 text-green-800">
+                <Sprout className="w-5 h-5" />
+                
+                <span className="font-medium text-green-800">Sustainable Production</span>
+              </div>
+              <div className="flex items-center gap-3 text-green-800">
+                <GlassWater className="w-5 h-5" />
+                
+                <span className="font-medium text-green-800">Resource Conservation</span>
+              </div>
+              <div className="flex items-center gap-3 text-green-800">
+                <ChartArea className="w-5 h-5" />
+                
+                <span className="font-medium text-green-800">Economic Growth</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side - Visual element */}
+          <div className="relative h-full min-h-[300px] rounded-xl overflow-hidden shadow-lg">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-800/90 to-green-700/70 flex items-center justify-center p-8">
+              <div className="text-white text-center">
+                <h3 className="text-2xl font-bold mb-4">Our Value Chain Approach</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                    <p className="font-semibold mb-2">PRODUCTION</p>
+                    <p>Sustainable farming and fishing practices</p>
+                  </div>
+                  <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                    <p className="font-semibold mb-2">PROCESSING</p>
+                    <p>Value addition and quality control</p>
+                  </div>
+                  <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                    <p className="font-semibold mb-2">DISTRIBUTION</p>
+                    <p>Market access and efficient logistics</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+    <section className="bg-white py-16 border-t">
+  <div className="max-w-7xl mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">WE AIM TO</h2>
+    
+    {/* SDG Grid */}
+    <div className="mb-16">
+      <h3 className="text-center text-lg font-semibold text-gray-600 mb-8">
+        Contributing to Sustainable Development Goals
+      </h3>
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-4 justify-items-center">
+  {[1, 2, 9, 10, 12, 17].map((sdg) => (
+    <div key={sdg} className="group relative cursor-pointer">
+      <img 
+        src={`/SDG-Goals/SDG-${sdg}.png`}
+        alt={`SDG ${sdg}`}
+        className="w-20 h-20 object-cover transition-transform duration-300 hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300" />
+    </div>
+  ))}
+</div>
+    </div>
+ {/* Aims Grid with SDG Connections */}
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      {/* Aim 1 - Strongest connection to SDG 9, 2, 12 */}
+      <div className="flex flex-col items-center text-center p-6 bg-green-50 rounded-xl transition-all duration-300 hover:shadow-lg">
+        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-white rounded-full shadow-sm">
+          <Microscope className="w-16 h-16 text-green-600" strokeWidth={1.5} />
+        </div>
+        <p className="font-bold text-gray-800 leading-relaxed">
+          ADVANCE RESEARCH & INNOVATION: 
+          </p><p>Directly drives progress in SDG 9 (Industry & Innovation) through technological development, while supporting SDG 2 (Hunger) via improved agricultural practices and SDG 12 through sustainable production research.
+        </p>
+      </div>
 
-      {/* 4) Roadmap & Timeline Section */}
-      <section className="bg-white py-12">
+      {/* Aim 2 - Connects to SDG 1, 10, 12 */}
+      <div className="flex flex-col items-center text-center p-6 bg-green-50 rounded-xl transition-all duration-300 hover:shadow-lg">
+        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-white rounded-full shadow-sm">
+          <Blocks className="w-16 h-16 text-green-600" strokeWidth={1.5} />
+        </div>
+        <p className="font-bold text-gray-800 leading-relaxed">
+          DEVELOP IMPACTFUL SOLUTIONS: 
+          </p>
+          <p>Addresses SDG 1 (Poverty) through economic growth, SDG 10 (Inequality) via inclusive systems, and SDG 12 by promoting responsible resource use in production cycles.
+        </p>
+      </div>
+
+      {/* Aim 3 - Supports SDG 17, 9, 2 */}
+      <div className="flex flex-col items-center text-center p-6 bg-green-50 rounded-xl transition-all duration-300 hover:shadow-lg">
+        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-white rounded-full shadow-sm">
+          <Boxes className="w-16 h-16 text-green-600" strokeWidth={1.5} />
+        </div>
+        <p className="font-bold text-gray-800 leading-relaxed">
+          SERVE AS A LEADING HUB: 
+          </p>
+          <p>Fulfills SDG 17 (Partnerships) through collaboration, SDG 9 by building knowledge infrastructure, and SDG 2 via disseminating hunger-alleviation strategies across agricultural networks.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+     
+      {/* NEW: News and Updates Section */}
+      <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
-            Project Roadmap (12 Months)
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4 border rounded-md">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">Q1 - Q2</h3>
-              <p className="text-gray-700 font-medium">Facility Setup & Hiring</p>
-              <p className="text-sm text-gray-600 mt-1">
-                Acquire equipment and office furniture, hire key personnel (value chain 
-                analyst, developer), and launch the AAVC Lab.
-              </p>
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">NEWS AND UPDATES</h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main News Item */}
+            <div className="lg:col-span-2">
+              <div className="rounded-lg overflow-hidden shadow-md">
+                <div className="relative h-80 w-full">
+                  <Image
+                    src="/news-events/game-oral.jpg?height=600&width=800"
+                    alt="Lab Launches Mentoring Program"
+                    fill
+                    className="object-cover"
+                  />
+                </div> 
+                <div className="p-6 bg-white">
+                <Link
+    href="/news-events/1"
+    className="text-2xl font-bold text-green-600 hover:text-green-700 hover:underline"
+  >
+                   UPLB 4th Global Agribusiness Management and Entrepreneurship Conference and Expo (GAME 2024) DOST-PCAARRD-led Parallel Session
+                  </Link>
+                  <p className="text-gray-500 mt-2">16 January, 2025</p>
+                  <p className="mt-3 text-gray-700">
+                    The Development Innovations and Policy Laboratory launched its Mentoring Program on Policy Analysis
+                    and Policy Research Proposal Development...
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="p-4 border rounded-md">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">Q2 - Q3</h3>
-              <p className="text-gray-700 font-medium">Review & Repository</p>
-              <p className="text-sm text-gray-600 mt-1">
-                Compile literature on existing VC methodologies, refine them, and 
-                incorporate into a working repository for easy access.
-              </p>
+
+            {/* Sidebar News Items */}
+            <div className="space-y-6">
+              {/* News Item 1 */}
+              <div className="flex gap-4">
+                <div className="relative h-24 w-32 flex-shrink-0">
+                  <Image
+                    src="/news-events/smardec.jpg?height=200&width=300"
+                    alt="Lab Institutionalizes"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
+                <div>
+                <Link
+    href="/news-events/2"
+    className="text-2xl font-bold text-green-600 hover:text-green-700 hover:underline"
+  >
+                  SMAARRDEC 37th Regional Symposium on Research, Development and Extension Highlights
+                  </Link>
+                  <p className="text-gray-500 text-sm mt-1">20 November, 2024</p>
+                </div>
+              </div>
+
+              {/* News Item 2 */}
+              <div className="flex gap-4">
+                <div className="relative h-24 w-32 flex-shrink-0">
+                  <Image
+                    src="/news-events/17th-1.jpg?height=200&width=300"
+                    alt="Training Program"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
+                <div>
+                <Link
+    href="/news-events/3"
+    className="text-2xl font-bold text-green-600 hover:text-green-700 hover:underline"
+  >
+                    17th UP Mindanao Supply Chain Management Forum: Sustainable Growth and Optimization in Agricultural Value Chains
+                  </Link>
+                  <p className="text-gray-500 text-sm mt-1">10 October, 2024</p>
+                </div>
+              </div>
+
+              {/* News Item 3 */}
+              <div className="flex gap-4">
+                <div className="relative h-24 w-32 flex-shrink-0">
+                  <Image
+                    src="/news-events/mindanao-symposium.jpg?height=200&width=300"
+                    alt="Policy Workshop"
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
+                <div>
+                <Link
+    href="/news-events/4"
+    className="text-2xl font-bold text-green-600 hover:text-green-700 hover:underline"
+  >
+                    Mindanao Research Symposium on the Future of Agri-food Systems  
+                  </Link>
+                  <p className="text-gray-500 text-sm mt-1">22 August, 2024</p>
+                </div>
+              </div>
             </div>
-            <div className="p-4 border rounded-md">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">Q3 - Q4</h3>
-              <p className="text-gray-700 font-medium">App Integration & Partnerships</p>
-              <p className="text-sm text-gray-600 mt-1">
-                Test and finalize decision-support systems, forge partnerships 
-                (3 MOUs), and facilitate market transactions among chain players.
-              </p>
-            </div>
+          </div>
+
+          <div className="flex justify-center mt-10">
+            <Button variant="outline" className="bg-green-600 hover:bg-green-700 text-white">
+              Show more
+            </Button>
           </div>
         </div>
       </section>
+
+      {/* NEW: Our Services Section */}
+      <section className="w-full py-16 bg-green-600 text-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">OUR SERVICES</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
+            {/* Service 1 */}
+            <Link href="/services/capacity-building">
+            <div className="flex flex-col items-center">
+              <Monitor className="w-16 h-16 mb-4" />
+              <h3 className="text-sm font-bold uppercase">CAPACITY BUILDING</h3>
+            </div>
+            </Link>
+            {/* Service 2 */}
+            <Link href="/services/mobile-apps">
+            <div className="flex flex-col items-center">
+              <Users className="w-16 h-16 mb-4" />
+              <h3 className="text-sm font-bold uppercase">MOBILE APPS</h3>
+            </div>
+            </Link>
+            {/* Service 3 */}
+            <Link href="/services/repository">
+            <div className="flex flex-col items-center">
+              <Projector className="w-16 h-16 mb-4" />
+              <h3 className="text-sm font-bold uppercase">REPOSITORY</h3>
+            </div>
+            </Link>
+            {/* Service 4 */}
+
+            <Link href="/services/directory">
+            <div className="flex flex-col items-center">
+              <FileText className="w-16 h-16 mb-4" />
+              <h3 className="text-sm font-bold uppercase">DIRECTORY</h3>
+            </div>
+            </Link>
+
+      
+          </div>
+
+          <div className="flex justify-center mt-10">
+            {/* <Button variant="secondary" className="bg-[#0A3D62] hover:bg-[#0c4b79] text-white">
+              Read more
+            </Button> */}
+          </div>
+        </div>
+      </section>
+
 
       {/* 5) Final CTA Section */}
       <section
@@ -226,27 +354,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 6) Footer */}
-      <footer className="bg-gray-100 py-8">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div>
-            <p className="font-bold text-xl text-gray-800">Agri-Aqua Value Chain Laboratory</p>
-            <p className="text-sm text-gray-500 mt-1">
-              University of the Philippines Mindanao <br />
-              Davao City, 8100 Philippines
-            </p>
-            <div className="mt-2 flex gap-2 text-gray-600 text-sm">
-              <Link href="#">LinkedIn</Link> | 
-              <Link href="#">Facebook</Link> | 
-              <Link href="#">Twitter</Link>
-            </div>
-          </div>
-          <div className="text-sm text-gray-500">
-            <p>&copy; 2025 AAVC Lab. Funded by DOST-PCAARRD. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

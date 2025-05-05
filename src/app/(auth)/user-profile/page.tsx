@@ -1,4 +1,4 @@
-import { AllUserScreen } from "@/components/client/AllUserScreen"
+import { AllUserScreen } from "@/components/auth/AllUserScreen"
 
 export default function UserProfilePage () {
 

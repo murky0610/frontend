@@ -7,11 +7,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Scale, BookOpen, GraduationCap, Boxes, HandCoins, Cpu, Coffee, Banana, Bean, UserRoundPen, SlidersHorizontal } from "lucide-react";
+import { Scale, BookOpen, GraduationCap, Boxes, HandCoins, Cpu, Coffee, Banana, Bean, UserRoundPen, SlidersHorizontal, ExternalLink } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { RepositoryInterface } from "@/interface/repository.interface";
 import { Input } from "@/components/ui/input";
-import RepositoryFilterSearch from "@/components/client/RepositoryFilterSearch";
+import RepositoryFilterSearch from "../interaction-elements/RepositoryFilterSearch";
+import Link from "next/link";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 const categoryIcons = {
   "Policy Brief": Scale,
@@ -53,6 +63,8 @@ export function DisplayRepositories() {
   const [open, setOpen] = useState<boolean>(false);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const debouncedSearchKeyword = useDebounce(searchKeyword, 300);
   const [activeFilters, setActiveFilters] = useState({
@@ -62,6 +74,7 @@ export function DisplayRepositories() {
     startYear: '',
     endYear: ''
   });
+
   const fuse = useMemo(() => {
     if (repositories.length === 0) return null;
     return new Fuse(repositories, {
@@ -79,50 +92,52 @@ export function DisplayRepositories() {
       ignoreLocation: true,
     });
   }, [repositories]);
- // Combined filter function
- const filteredRepositories = useMemo(() => {
-  let results = repositories;
-  
-  // Apply search
-  if (debouncedSearchKeyword && fuse) {
-    results = fuse.search(debouncedSearchKeyword).map(result => result.item);
-  }
 
-  // Apply filters
-  return results.filter(repo => {
-    // Category filter
-    if (activeFilters.categories.length > 0 && 
-        !activeFilters.categories.includes(repo.select_category)) {
-      return false;
+  const filteredRepositories = useMemo(() => {
+    let results = repositories;
+    
+    if (debouncedSearchKeyword && fuse) {
+      results = fuse.search(debouncedSearchKeyword).map(result => result.item);
     }
 
-    // Focus filter
-    if (activeFilters.focuses.length > 0 && 
-        !activeFilters.focuses.includes(repo.select_focus)) {
-      return false;
-    }
+    return results.filter(repo => {
+      if (activeFilters.categories.length > 0 && 
+          !activeFilters.categories.includes(repo.select_category)) {
+        return false;
+      }
 
-    // Commodity filter
-    if (activeFilters.commodities.length > 0 && 
-        !activeFilters.commodities.includes(repo.select_commodity)) {
-      return false;
-    }
+      if (activeFilters.focuses.length > 0 && 
+          !activeFilters.focuses.includes(repo.select_focus)) {
+        return false;
+      }
 
-    // Year filter
-    const repoYear = new Date(repo.date_published).getFullYear();
-    if (activeFilters.startYear && activeFilters.startYear !== "any" && 
-        repoYear < parseInt(activeFilters.startYear)) {
-      return false;
-    }
-    if (activeFilters.endYear && activeFilters.endYear !== "any" && 
-        repoYear > parseInt(activeFilters.endYear)) {
-      return false;
-    }
+      if (activeFilters.commodities.length > 0 && 
+          !activeFilters.commodities.includes(repo.select_commodity)) {
+        return false;
+      }
 
+      const repoYear = new Date(repo.date_published).getFullYear();
+      if (activeFilters.startYear && activeFilters.startYear !== "any" && 
+          repoYear < parseInt(activeFilters.startYear)) {
+        return false;
+      }
+      if (activeFilters.endYear && activeFilters.endYear !== "any" && 
+          repoYear > parseInt(activeFilters.endYear)) {
+        return false;
+      }
 
-    return true;
-  });
-}, [repositories, debouncedSearchKeyword, fuse, activeFilters]);
+      return true;
+    });
+  }, [repositories, debouncedSearchKeyword, fuse, activeFilters]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredRepositories]);
+
+  const totalPages = Math.ceil(filteredRepositories.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedRepositories = filteredRepositories.slice(startIndex, startIndex + itemsPerPage);
+
   const fetchRepositories = async () => {
     try {
       const data = await displayMyRepositories();
@@ -163,7 +178,7 @@ export function DisplayRepositories() {
             <Input
               type="search"
               placeholder="Search..."
-               className="w-full md:w-95"
+              className="w-full md:w-95"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
             />
@@ -183,7 +198,7 @@ export function DisplayRepositories() {
           <div className="flex flex-col md:flex-row gap-2">
             {/* Cards Section */}
             <div className="grid grid-cols-1 gap-6 flex-1">
-              {filteredRepositories.map((repo) => {
+              {paginatedRepositories.map((repo) => {
                 const CategoryIcon = categoryIcons[repo.select_category as keyof typeof categoryIcons];
                 const FocusIcon = focusIcons[repo.select_focus as keyof typeof focusIcons];
                 const CommodityIcon = commodityIcons[repo.select_commodity as keyof typeof commodityIcons];
@@ -192,7 +207,7 @@ export function DisplayRepositories() {
                 return (
                   <Card key={repo.id} className="shadow-md bg-white p-4">
                     <CardHeader>
-                      <CardTitle>{repo.title}</CardTitle>
+                      <CardTitle><p className="text-4xl">{repo.title}</p></CardTitle>
                     </CardHeader>
                     <CardContent>
                       <Label className="text-gray-600">Published on: {repo.date_published}</Label>
@@ -219,8 +234,8 @@ export function DisplayRepositories() {
                     </CardContent>
                     <Separator />
                     <CardContent>
-                      <div>
-                        <p className="text-gray-700">
+                      <div className="mt-5">
+                        <p className="text-[#3b3d42] text-lg font-sans tracking-normal">
                           {isExpanded ? repo.description : `${repo.description.substring(0, 150)}...`}
                         </p>
                         {repo.description.length > 150 && (
@@ -234,17 +249,12 @@ export function DisplayRepositories() {
                       </div>
                     </CardContent>
                     <CardContent>
-                      <Label>
-                        Visit the Link:{" "}
-                        <a
-                          href={repo.url_repository}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline mt-2 block"
-                        >
-                          {repo.url_repository}
-                        </a>
-                      </Label>
+                 
+                    <Button asChild variant="outline" className="w-full sm:w-auto">
+                           <Link href={repo.url_repository} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                                          View Full Details <ExternalLink className="ml-2 h-4 w-4" />
+                                        </Link>
+                </Button>
                     </CardContent>
                   </Card>
                 );
@@ -259,6 +269,47 @@ export function DisplayRepositories() {
               />
             </div>
           </div>
+        )}
+        
+        {totalPages > 0 && (
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage > 1) setCurrentPage(currentPage - 1);
+                  }}
+                  className={currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <PaginationItem key={i + 1}>
+                  <PaginationLink
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCurrentPage(i + 1);
+                    }}
+                    isActive={currentPage === i + 1}
+                  >
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                  }}
+                  className={currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         )}
       </div>
     </div>

@@ -1,7 +1,7 @@
 
-import NavigationBar from "@/components/client/NavigationBar";
+import NavigationBar from "@/components/interaction-elements/NavigationBar";
 import { Toaster } from "@/components/ui/sonner";
-export default function CredentialLayout({
+export default function RootMarketingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

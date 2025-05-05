@@ -1,5 +1,5 @@
 'use client';
-import { DisplayMyRepositories } from "@/components/client/DisplayMyRepositories";
+import { DisplayMyRepositories } from "@/components/auth/DisplayMyRepositories";
 import { getCurrentUser } from "@/api/api";
 import { useEffect, useState } from "react";
 
