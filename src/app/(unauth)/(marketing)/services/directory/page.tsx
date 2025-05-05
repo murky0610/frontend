@@ -542,3 +542,11 @@
 // };
 
 // export default MindanaoMap;
+export default function DirectoryPage(){
+
+  return(
+    <div>
+      This is dir
+    </div>
+  )
+}
