@@ -1,13 +1,10 @@
 "use client"
 import Image from "next/image"
-import Link from "next/link"
-import { ExternalLink, Facebook, Calendar, User, Building2, Mail } from "lucide-react"
+import { Calendar, User, Building2, Mail } from "lucide-react"
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"; // Adjust path as needed
-
-import { Fish } from "lucide-react"
 import { useState } from "react"
 // Updated project data with actual information
 const projects = [
@@ -121,21 +118,21 @@ export default function ComplementaryProjects() {
                                   />
                               </div>
                               <div className="flex-1"> {/* Allow title area to take remaining space */}
-                                  <Badge
-                                      className="mb-1" // Slightly reduced margin
-                                      variant={
-                                          project.status === "Completed"
-                                              ? "secondary"
-                                              : project.status === "Ongoing"
-                                                  ? "default"
-                                                  : project.status === "Newly Approved"
-                                                      ? "success"
-                                                      : "outline"
-                                      }
-                                  >
-                                      {project.status}
-                                  </Badge>
-                                  <CardTitle className="text-lg leading-tight">{project.name}</CardTitle> {/* Added leading-tight */}
+                              <Badge
+      className="mb-1" // Slightly reduced margin
+      variant={
+          project.status === "Completed"
+              ? "secondary"
+              : project.status === "Ongoing"
+                  ? "default"
+                  : project.status === "Newly Approved"
+                      ? "green" // Changed from "success" to "green"
+                      : "outline"
+      }
+  >
+      {project.status}
+  </Badge>
+                                    <CardTitle className="text-lg leading-tight">{project.name}</CardTitle> {/* Added leading-tight */}
                               </div>
                           </div>
 {/* --- Improved Details Section --- */}

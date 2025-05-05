@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { BarChart3, Blocks, Boxes, ChartArea, ChevronRight, FileText, GlassWater, Microscope, Monitor, Projector, Sprout, Users } from "lucide-react";
+import { Blocks, Boxes, ChartArea, FileText, GlassWater, Microscope, Monitor, Projector, Sprout, Users } from "lucide-react";
 
 export default function LandingPage() {
   return (

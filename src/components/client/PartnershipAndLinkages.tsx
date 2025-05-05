@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 // Added PhoneIcon and MailIcon
 import { HandshakeIcon, LinkIcon, PhoneIcon, MailIcon } from "lucide-react";
 

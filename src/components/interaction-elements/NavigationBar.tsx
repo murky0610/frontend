@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 import * as React from "react"
 import Link from "next/link"
@@ -65,10 +66,10 @@ const services = [
   // Note: Cost Calculator and MPO are now nested within Coffee and Cacao under Mobile App
 ]
 
-const knowledgeManagements =[
-  { title: "Repository", href: "/services/repository" },
-  { title: "Directory", href: "/services/directory" },
-]
+// const knowledgeManagements =[
+//   { title: "Repository", href: "/services/repository" },
+//   { title: "Directory", href: "/services/directory" },
+// ]
 
 export default function NavigationMenuDemo() {
   const router = useRouter()
