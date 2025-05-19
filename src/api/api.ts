@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { RepositoryInterface } from '@/interface/repository.interface';
 import { UserRegisterInterface, userRegisterSchema } from '@/schema/user-register.schema';
+import { ProvinceCommodityMap } from '@/interface/directory.inteface';
 // Create an Axios instance with a predefined baseURL
 const apiClient = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/',
@@ -12,7 +13,29 @@ const apiClient = axios.create({
   },
 });
 
+export const displayDirectories = async (): Promise<ProvinceCommodityMap> =>{
+  try {
+    const response = await apiClient.get<ProvinceCommodityMap>(
+      'directories/sorted/'
+    );
+    return response.data;
+  } catch (err) {
+    console.error("Error fetching owners by province:", err);
+    throw err;
+  }
+}
 
+export const displayCommoditiesInProvince = async ()=>{
+  try {
+    const response = await apiClient.get(
+      'directories/unique/'
+    );
+    return response.data;
+  } catch (err) {
+    console.error("Error fetching owners by province:", err);
+    throw err;
+  }
+}
 // Login function utilizing the Axios instance
 export const userLogin = async (email: any, password: any) => {
     try {
