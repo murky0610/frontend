@@ -148,34 +148,39 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
 
     const geoJSONStyle = useCallback((feature?: GeoJSONTypes.Feature): L.PathOptions => {
         const defaultStyle: L.PathOptions = {
-            fillColor: "green", weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.4
+            fillColor: "grey", weight: 2, opacity: 4, color: 'grey', dashArray: '4', fillOpacity: 0.1
         };
         const highlightStyle: L.PathOptions = {
             fillColor: "yellow", weight: 3, opacity: 1, color: '#FF0000', dashArray: '', fillOpacity: 0.7
         };
-        if (feature?.properties?.name === selectedProvinceOnMap) {
-            return highlightStyle;
-        }
+  // Check if this province is in the selected filters
+    if (feature?.properties?.name && selectedFilterProvinces.has(feature.properties.name)) {
+        return highlightStyle;
+    }
         return defaultStyle;
-    }, [selectedProvinceOnMap]);
+    }, [selectedFilterProvinces]);
 
-    const onEachFeature = useCallback((feature: GeoJSONTypes.Feature, layer: Layer) => {
-        if (feature.properties && feature.properties.name) {
-            const provinceNameFromGeoJSON = feature.properties.name;
-            layer.on({
-                click: () => {
-                    setSelectedProvinceOnMap(prev => prev === provinceNameFromGeoJSON ? null : provinceNameFromGeoJSON);
-                    // Optionally, if you want map click to also update province filters:
-                    // setSelectedFilterProvinces(prev => {
-                    //     const newSet = new Set(prev);
-                    //     if (newSet.has(provinceNameFromGeoJSON)) newSet.delete(provinceNameFromGeoJSON);
-                    //     else newSet.add(provinceNameFromGeoJSON);
-                    //     return newSet;
-                    // });
-                }
-            });
-        }
-    }, []); // setSelectedProvinceOnMap is stable
+
+// Update the province click handler to manage filters
+const onEachFeature = useCallback((feature: GeoJSONTypes.Feature, layer: Layer) => {
+    if (feature.properties && feature.properties.name) {
+        const provinceName = feature.properties.name;
+        layer.on({
+            click: () => {
+                setSelectedFilterProvinces(prev => {
+                    const newSet = new Set(prev);
+                    if (newSet.has(provinceName)) {
+                        newSet.delete(provinceName);
+                    } else {
+                        newSet.add(provinceName);
+                    }
+                    return newSet;
+                });
+            }
+        });
+    }
+}, []);
+// setSelectedProvinceOnMap is stable
 
     // --- Filter handlers ---
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -191,18 +196,18 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
         });
     };
 
-    const handleProvinceFilterChange = (province: string, checked: boolean) => {
-        setSelectedFilterProvinces(prev => {
-            const newSet = new Set(prev);
-            if (checked) newSet.add(province);
-            else newSet.delete(province);
-            return newSet;
-        });
-         // Deselect province on map if it's unchecked in filters to avoid confusion
-        if (!checked && selectedProvinceOnMap === province) {
-            setSelectedProvinceOnMap(null);
+const handleProvinceFilterChange = (province: string, checked: boolean) => {
+    setSelectedFilterProvinces(prev => {
+        const newSet = new Set(prev);
+        if (checked) {
+            newSet.add(province);
+        } else {
+            newSet.delete(province);
         }
-    };
+        return newSet;
+    });
+};
+
 
 
     const directoryMarkers = useMemo(() => {
@@ -211,10 +216,7 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
         const markers: JSX.Element[] = [];
         let markerKey = 0;
 
-        const provincesToIterate = selectedFilterProvinces.size > 0
-            ? Array.from(selectedFilterProvinces)
-            : allAvailableProvinces; // Or Object.keys(fetchedDirectoryData) if allAvailableProvinces isn't populated yet
-
+    const provincesToIterate = Array.from(selectedFilterProvinces);
         provincesToIterate.forEach(provinceName => {
             if (!Object.prototype.hasOwnProperty.call(fetchedDirectoryData, provinceName)) return;
 
@@ -281,14 +283,7 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
             }
         });
         return markers;
-    }, [
-        fetchedDirectoryData,
-        selectedFilterProvinces,
-        selectedFilterCommodities,
-        searchTerm,
-        allAvailableProvinces, // Added as it's used in the logic
-        mapInstance // Added mapInstance to dependencies of marker click
-    ]);
+    }, [fetchedDirectoryData, selectedFilterProvinces, selectedFilterCommodities, searchTerm, mapInstance]);
 
     const handleOwnerSelectFromSidebar = (owner: OwnerWithContext) => {
         setSelectedOwner(owner);
@@ -298,6 +293,7 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
     };
 
     const renderSidebarContent = () => {
+        const [firstSelectedProvince] = selectedFilterProvinces;
         // Content for when an owner is selected
         if (selectedOwner) {
             return (
@@ -334,8 +330,8 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
 
         // Content for when a province is clicked on the map (and no specific owner)
         // This lists commodities for the *map-selected* province, respecting commodity filters and search
-        if (selectedProvinceOnMap && fetchedDirectoryData && !selectedOwner) {
-            const provinceCommodities = fetchedDirectoryData[selectedProvinceOnMap];
+      if (firstSelectedProvince && fetchedDirectoryData && !selectedOwner) {
+            const provinceCommodities = fetchedDirectoryData[firstSelectedProvince];
             if (!provinceCommodities || Object.keys(provinceCommodities).length === 0) {
                 return <p>No commodities listed for {selectedProvinceOnMap}.</p>;
             }
