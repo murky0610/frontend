@@ -39,10 +39,38 @@ const defaults = {
 
 // --- Helper function for commodity colors (from previous step) ---
 const predefinedCommodityColors: { [key: string]: string } = {
-    "Cacao": "#795548", "Coffee": "#A1887F", "Coconut": "#4CAF50",
-    "Banana": "#FFEB3B", "Mango": "#FF9800", "Durian": "#8BC34A",
-    "Processed Fruits": "#FFC107", "Livestock": "#E91E63", "Aquaculture": "#2196F3",
-    // Add more default commodities as needed
+    // Existing colors
+    "Cacao": "#795548",
+    "Coffee": "#A1887F",
+    "Coconut": "#4CAF50",
+    "Banana": "#FFEB3B",
+    "Mango": "#FF9800",
+    "Durian": "#8BC34A",
+    "Processed Fruits": "#FFC107",
+    "Livestock": "#E91E63",
+    "Aquaculture": "#2196F3",
+    
+    // Newly added commodities with generated colors
+    "Banana - Saba": "#AE8D13",
+    "Calamansi": "#1D7A3C",
+    "Cashew": "#C4722D",
+    "Cassava": "#9C27B0",
+    "Chili": "#D32F2F",
+    "Corn": "#FFC400",
+    "Ginger": "#795548",
+    "Guava": "#43A047",
+    "Guyabano": "#7CB342",
+    "Jackfruit": "#F57C00",
+    "Macapuno": "#AFB42B",
+    "Mangosteen": "#8E24AA",
+    "Marang": "#5D4037",
+    "Moringa": "#689F38",
+    "Peanut": "#6D4C41",
+    "Pineapple": "#FBC02D",
+    "Sweetpotato": "#FF6F00",
+    "Taro": "#4CAF50",
+    "Turmeric": "#FFA000",
+    "Ube": "#7B1FA2"
 };
 const generateCommodityColor = (commodityName: string): string => {
     let hash = 0;
@@ -75,7 +103,7 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
     // --- Derived lists for filter options ---
     const allAvailableProvinces = useMemo(() => {
         if (!davaoRegionGeoJSON || !davaoRegionGeoJSON.features) return [];
-        return davaoRegionGeoJSON.features.map(feature => feature.properties.name).sort();
+        return davaoRegionGeoJSON.features.map(feature => feature?.properties?.name).sort();
     }, []); // davaoRegionGeoJSON is static
 
     const allAvailableCommodities = useMemo(() => {
@@ -87,6 +115,8 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
         return Array.from(commodities).sort();
     }, [fetchedDirectoryData]);
 
+    console.log("fetchedDirectory data: ", fetchedDirectoryData);
+
 
     useEffect(() => {
         const loadDirectories = async () => {
@@ -94,6 +124,7 @@ const ComplementaryProjects = (propsMap: MapProps) => { // Renamed props to prop
             setError(null);
             try {
                 const response = await displayDirectories();
+                console.log("this is the directories values: ", response);
                 setFetchedDirectoryData(response);
             } catch (err) {
                 console.error("Error fetching directory data:", err);
