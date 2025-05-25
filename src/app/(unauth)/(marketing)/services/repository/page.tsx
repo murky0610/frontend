@@ -1,10 +1,9 @@
-import { DisplayRepositories } from "@/components/client/DisplayRepositories";
+import { DisplayRepositories } from '@/components/client/DisplayRepositories';
 
-export default function DisplayRepositoriesPage () {
-
-  return(
+export default function DisplayRepositoriesPage() {
+  return (
     <div>
-      <DisplayRepositories/>
+      <DisplayRepositories />
     </div>
-  )
+  );
 }

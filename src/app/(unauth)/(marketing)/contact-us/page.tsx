@@ -1,10 +1,8 @@
-
-import { ContactUsSection } from "@/components/client/ContactUs"
+import { ContactUsSection } from '@/components/client/ContactUs';
 export default function ContactUsPage() {
-    return (
-<div>
-  <ContactUsSection/>
-</div>
-    )
-  }
-  
+  return (
+    <div>
+      <ContactUsSection />
+    </div>
+  );
+}

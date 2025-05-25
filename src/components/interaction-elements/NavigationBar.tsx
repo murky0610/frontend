@@ -1,7 +1,7 @@
-"use client"
-import * as React from "react"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
+'use client';
+import * as React from 'react';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,10 +9,10 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { Button } from "../ui/button"
-import Image from "next/image"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from '@/components/ui/navigation-menu';
+import { Button } from '../ui/button';
+import Image from 'next/image';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,8 +20,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu"
-import { LogOut, LayoutDashboard, UserRound } from "lucide-react"
+} from '@/components/ui/dropdown-menu';
+import { LogOut, LayoutDashboard, UserRound } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -29,107 +29,118 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { getCurrentUser, editCurrentUser, userLogout } from "@/api/api"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { getCurrentUser, editCurrentUser, userLogout } from '@/api/api';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 interface UserDetail {
-  firstName: string
-  lastName: string
-  email: string
-  role: string
-  userId: number
-  avatarUrl?: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  userId: number;
+  avatarUrl?: string;
 }
 
 const components = [
-  { title: "What We Do", href: "/about-us/what-we-do" },
-  { title: "Who We Are", href: "/about-us/who-we-are" },
-  { title: "Research and Development", href: "/about-us/research-development" },
-  { title: "Partnerships and Linkages", href: "/about-us/partnership-linkages" },
-]
+  { title: 'What We Do', href: '/about-us/what-we-do' },
+  { title: 'Who We Are', href: '/about-us/who-we-are' },
+  { title: 'Research and Development', href: '/about-us/research-development' },
+  { title: 'Partnerships and Linkages', href: '/about-us/partnership-linkages' },
+];
 
 const services = [
   {
-    title: "Mobile App",
-    href: "/services/mobile-app", // Example parent link for the overall Mobile App section
+    title: 'Mobile App',
+    href: '/services/mobile-app', // Example parent link for the overall Mobile App section
   },
-  {title: "Research and Development", href: "/services/research-development"},
-  { title: "Capacity Building", href: "/services/capacity-building" },  
-  //{ title: "Knowledge Management", href: "" },  
+  { title: 'Research and Development', href: '/services/research-development' },
+  { title: 'Capacity Building', href: '/services/capacity-building' },
+  //{ title: "Knowledge Management", href: "" },
   // { title: "Repository", href: "/services/repository" },
   // { title: "Directory", href: "/services/directory" },
   // Note: Cost Calculator and MPO are now nested within Coffee and Cacao under Mobile App
-]
+];
 
-const knowledgeManagements =[
-  { title: "Repository", href: "/services/repository" },
-  { title: "Directory", href: "/services/directory" },
-]
+const knowledgeManagements = [
+  { title: 'Repository', href: '/services/repository' },
+  { title: 'Directory', href: '/services/directory' },
+];
 
 export default function NavigationMenuDemo() {
-  const router = useRouter()
-  const [userDetail, setUserDetail] = useState<UserDetail | null>(null)
-  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false)
-  const [editFirstName, setEditFirstName] = useState("")
-  const [editLastName, setEditLastName] = useState("")
-  const [editEmail, setEditEmail] = useState("")
+  const router = useRouter();
+  const [userDetail, setUserDetail] = useState<UserDetail | null>(null);
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
+  const [editFirstName, setEditFirstName] = useState('');
+  const [editLastName, setEditLastName] = useState('');
+  const [editEmail, setEditEmail] = useState('');
 
   const fetchUserData = async () => {
     try {
-      const response = await getCurrentUser()
+      const response = await getCurrentUser();
       const userData: UserDetail = {
         userId: response.id,
         firstName: response.first_name,
         lastName: response.last_name,
         email: response.email,
         role: response.role,
-        avatarUrl: "https://github.com/shadcn.png",
-      }
-      setUserDetail(userData)
-      setEditFirstName(response.first_name ?? "")
-      setEditLastName(response.last_name ?? "")
-      setEditEmail(response.email ?? "")
+        avatarUrl: 'https://github.com/shadcn.png',
+      };
+      setUserDetail(userData);
+      setEditFirstName(response.first_name ?? '');
+      setEditLastName(response.last_name ?? '');
+      setEditEmail(response.email ?? '');
     } catch (error) {
-      console.error("Failed to fetch user details: ", error)
+      console.error('Failed to fetch user details: ', error);
     }
-  }
+  };
 
   const editUserData = async () => {
     try {
-      const response = await editCurrentUser(editFirstName, editLastName, editEmail, userDetail?.userId)
-      console.log("Success editing information: ", response)
-      fetchUserData() // Refresh user data after edit
+      const response = await editCurrentUser(
+        editFirstName,
+        editLastName,
+        editEmail,
+        userDetail?.userId,
+      );
+      console.log('Success editing information: ', response);
+      fetchUserData(); // Refresh user data after edit
     } catch (error) {
-      console.error("Failed to edit user details: ", error)
+      console.error('Failed to edit user details: ', error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchUserData()
-  }, [])
+    fetchUserData();
+  }, []);
   const logoutUserData = async () => {
     try {
-      const response = await userLogout()
-      console.log("user logout successfully", response)
+      const response = await userLogout();
+      console.log('user logout successfully', response);
 
-      toast.success("Logged out successfully!")
-      setUserDetail(null)
-      router.push("/home")
+      toast.success('Logged out successfully!');
+      setUserDetail(null);
+      router.push('/home');
     } catch (error) {
-      console.error("Logout error:", error)
-      toast.error("Failed to log out. Please try again.")
+      console.error('Logout error:', error);
+      toast.error('Failed to log out. Please try again.');
     }
-  }
+  };
   return (
     <div className="w-full flex items-center justify-between px-6 md:px-12 py-3 bg-white border-b border-gray-200 shadow-sm">
       {/* Left Logo / Brand */}
       <div className="flex items-center gap-2">
         <Link href="/home" className="flex items-center">
-          <Image src="/VC Lab Logo PNG.png" alt="AAVC Logo" width={150} height={50} className="object-contain" />
+          <Image
+            src="/VC Lab Logo PNG.png"
+            alt="AAVC Logo"
+            width={150}
+            height={50}
+            className="object-contain"
+          />
         </Link>
       </div>
       {/* Center Nav Menu */}
@@ -174,7 +185,10 @@ export default function NavigationMenuDemo() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/news-events" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
+            <Link
+              href="/news-events"
+              className="px-1 py-1.5 hover:text-emerald-700 transition-colors"
+            >
               News and Events
             </Link>
           </NavigationMenuItem>
@@ -184,17 +198,26 @@ export default function NavigationMenuDemo() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/knowledge-management" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
+            <Link
+              href="/knowledge-management"
+              className="px-1 py-1.5 hover:text-emerald-700 transition-colors"
+            >
               Knowledge Management
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/complement-projects" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
+            <Link
+              href="/complement-projects"
+              className="px-1 py-1.5 hover:text-emerald-700 transition-colors"
+            >
               Complementary Projects
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/contact-us" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
+            <Link
+              href="/contact-us"
+              className="px-1 py-1.5 hover:text-emerald-700 transition-colors"
+            >
               Contact Us
             </Link>
           </NavigationMenuItem>
@@ -246,7 +269,7 @@ export default function NavigationMenuDemo() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => router.push("/dashboard")}
+                onClick={() => router.push('/dashboard')}
                 className="flex items-center gap-2 cursor-pointer px-2 py-1.5 rounded-md"
               >
                 <LayoutDashboard className="h-4 w-4" />
@@ -270,7 +293,10 @@ export default function NavigationMenuDemo() {
           </DropdownMenu>
         ) : (
           <div className="flex items-center space-x-3">
-            <Link href="/login" className="text-gray-700 hover:text-emerald-700 font-medium transition-colors">
+            <Link
+              href="/login"
+              className="text-gray-700 hover:text-emerald-700 font-medium transition-colors"
+            >
               Sign In
             </Link>
             <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
@@ -329,8 +355,8 @@ export default function NavigationMenuDemo() {
           <DialogFooter>
             <Button
               onClick={() => {
-                editUserData()
-                setIsUserProfileOpen(false)
+                editUserData();
+                setIsUserProfileOpen(false);
               }}
               className="bg-emerald-600 hover:bg-emerald-700 text-white"
             >
@@ -340,16 +366,16 @@ export default function NavigationMenuDemo() {
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
 interface ListItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   // Inherit standard anchor props like target, rel, etc.
-  href: string // Make href required
-  title: string
-  children: React.ReactNode
-  className?: string
+  href: string; // Make href required
+  title: string;
+  children: React.ReactNode;
+  className?: string;
 }
-const ListItem = React.forwardRef<React.ElementRef<"a">, ListItemProps>(
+const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
   ({ className, title, children, ...props }, ref) => {
     return (
       <li>
@@ -357,7 +383,7 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, ListItemProps>(
           <Link
             ref={ref}
             className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
               className,
             )}
             {...props}
@@ -368,7 +394,7 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, ListItemProps>(
           </Link>
         </NavigationMenuLink>
       </li>
-    )
+    );
   },
-)
-ListItem.displayName = "ListItem"
+);
+ListItem.displayName = 'ListItem';

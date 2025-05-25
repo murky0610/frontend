@@ -1,8 +1,8 @@
-"use client";
-import * as React from "react";
-import { useState, useEffect } from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+'use client';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,8 +10,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { format } from "date-fns";
+} from '@/components/ui/card';
+import { format } from 'date-fns';
 import {
   CalendarIcon,
   Scale,
@@ -23,28 +23,18 @@ import {
   Bean,
   Coffee,
   Banana,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
+import { RepositoryInterface } from '@/interface/repository.interface';
+import { editMyRepository } from '@/api/api';
+import { addRepositorySchema } from '@/schema/addrepository.schema';
 
-} from "@/components/ui/select";
-import { RepositoryInterface } from "@/interface/repository.interface";
-import { editMyRepository } from "@/api/api";
-import { addRepositorySchema } from "@/schema/addrepository.schema";
-
-import { toast } from "sonner"
+import { toast } from 'sonner';
 
 interface ModalEditRepositoryProps {
   open: boolean;
@@ -54,21 +44,21 @@ interface ModalEditRepositoryProps {
 }
 
 const categoryIcons: Record<string, React.ElementType> = {
-  "Policy Brief": Scale,
-  "Paper": BookOpen,
-  "Research Project": GraduationCap,
+  'Policy Brief': Scale,
+  Paper: BookOpen,
+  'Research Project': GraduationCap,
 };
 
 const focusIcons: Record<string, React.ElementType> = {
-  "Clustering": Boxes,
-  "Value Adding": HandCoins,
-  "Technology": Cpu,
+  Clustering: Boxes,
+  'Value Adding': HandCoins,
+  Technology: Cpu,
 };
 
 const commodityIcons: Record<string, React.ElementType> = {
-  "Cacao": Bean,
-  "Coffee": Coffee,
-  "Cavendish Banana": Banana,
+  Cacao: Bean,
+  Coffee: Coffee,
+  'Cavendish Banana': Banana,
 };
 
 export default function ModalEditRepository({
@@ -97,15 +87,15 @@ export default function ModalEditRepository({
   }, [repository]);
 
   const handleInputChange = (field: keyof RepositoryInterface, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleDateChange = (date: Date | undefined) => {
     if (date) {
       const formattedDate = format(date, 'yyyy-MM-dd');
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        date_published: formattedDate
+        date_published: formattedDate,
       }));
     }
   };
@@ -123,7 +113,7 @@ export default function ModalEditRepository({
   const renderSelectTrigger = (
     value: string,
     icons: Record<string, React.ElementType>,
-    placeholder: string
+    placeholder: string,
   ) => {
     const IconComponent = value ? icons[value] : null;
     return (
@@ -136,26 +126,26 @@ export default function ModalEditRepository({
     );
   };
   const handleSubmit = async () => {
-      setErrors({}); // Clear any previous errors
-    
-      // Validate form data with Zod
-      const validation = addRepositorySchema.safeParse(formData);
-      if (!validation.success) {
-        // ❌ Validation error
-        const formattedErrors = validation.error.format();
-        const newErrors: Record<string, string[]> = {};
-    
-        Object.entries(formattedErrors).forEach(([key, val]) => {
-          if (typeof val === "object" && "_errors" in val) {
-            newErrors[key] = val._errors;
-          } else {
-            newErrors[key] = [];
-          }
-        });
-    
-        setErrors(newErrors);
-        return;
-      }
+    setErrors({}); // Clear any previous errors
+
+    // Validate form data with Zod
+    const validation = addRepositorySchema.safeParse(formData);
+    if (!validation.success) {
+      // ❌ Validation error
+      const formattedErrors = validation.error.format();
+      const newErrors: Record<string, string[]> = {};
+
+      Object.entries(formattedErrors).forEach(([key, val]) => {
+        if (typeof val === 'object' && '_errors' in val) {
+          newErrors[key] = val._errors;
+        } else {
+          newErrors[key] = [];
+        }
+      });
+
+      setErrors(newErrors);
+      return;
+    }
     try {
       if (formData.id) {
         await editMyRepository(formData.id, {
@@ -166,9 +156,9 @@ export default function ModalEditRepository({
           date_published: formData.date_published,
           select_focus: formData.select_focus,
           select_commodity: formData.select_commodity,
-          select_category: formData.select_category
+          select_category: formData.select_category,
         });
-        toast("Repository Edited Successfully!");
+        toast('Repository Edited Successfully!');
         onSuccess();
         onClose();
       }
@@ -195,12 +185,12 @@ export default function ModalEditRepository({
               {/* Title */}
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Title</Label>
-                <Input 
-                  id="name" 
+                <Input
+                  id="name"
                   value={formData.title}
                   onChange={(e) => handleInputChange('title', e.target.value)}
                 />
-                      {errors.title?.map((msg, idx) => (
+                {errors.title?.map((msg, idx) => (
                   <p key={idx} className="text-red-500 text-sm">
                     {msg}
                   </p>
@@ -209,94 +199,102 @@ export default function ModalEditRepository({
 
               {/* Category, Focus, Commodity */}
               <div className="flex flex-row gap-8">
-               {/* Category Select */}
-  <div className="w-48 space-y-1.5">
-    <Label htmlFor="category">Category</Label>
-    <Select
-      value={formData.select_category}
-      onValueChange={(value) => handleInputChange('select_category', value)}
-    >
-      {renderSelectTrigger(formData.select_category, categoryIcons, "Select Category")}
-      <SelectContent>
-        {Object.entries(categoryIcons).map(([key, Icon]) => (
-          <SelectItem key={key} value={key}>
-            <div className="flex items-center gap-2">
-              <Icon className="w-4 h-4" />
-              {key}
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-    {errors.select_category?.map((msg, idx) => (
-                  <p key={idx} className="text-red-500 text-sm">
-                    {msg}
-                  </p>
-                ))}
-  </div>
+                {/* Category Select */}
+                <div className="w-48 space-y-1.5">
+                  <Label htmlFor="category">Category</Label>
+                  <Select
+                    value={formData.select_category}
+                    onValueChange={(value) => handleInputChange('select_category', value)}
+                  >
+                    {renderSelectTrigger(
+                      formData.select_category,
+                      categoryIcons,
+                      'Select Category',
+                    )}
+                    <SelectContent>
+                      {Object.entries(categoryIcons).map(([key, Icon]) => (
+                        <SelectItem key={key} value={key}>
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4" />
+                            {key}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.select_category?.map((msg, idx) => (
+                    <p key={idx} className="text-red-500 text-sm">
+                      {msg}
+                    </p>
+                  ))}
+                </div>
 
-  {/* Focus Select */}
-  <div className="w-48 space-y-1.5">
-    <Label htmlFor="focus">Focus</Label>
-    <Select
-      value={formData.select_focus}
-      onValueChange={(value) => handleInputChange('select_focus', value)}
-    >
-      {renderSelectTrigger(formData.select_focus, focusIcons, "Select Focus")}
-      <SelectContent>
-        {Object.entries(focusIcons).map(([key, Icon]) => (
-          <SelectItem key={key} value={key}>
-            <div className="flex items-center gap-2">
-              <Icon className="w-4 h-4" />
-              {key}
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-    {errors.select_focus?.map((msg, idx) => (
-                  <p key={idx} className="text-red-500 text-sm">
-                    {msg}
-                  </p>
-                ))}
-  </div>
+                {/* Focus Select */}
+                <div className="w-48 space-y-1.5">
+                  <Label htmlFor="focus">Focus</Label>
+                  <Select
+                    value={formData.select_focus}
+                    onValueChange={(value) => handleInputChange('select_focus', value)}
+                  >
+                    {renderSelectTrigger(formData.select_focus, focusIcons, 'Select Focus')}
+                    <SelectContent>
+                      {Object.entries(focusIcons).map(([key, Icon]) => (
+                        <SelectItem key={key} value={key}>
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4" />
+                            {key}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.select_focus?.map((msg, idx) => (
+                    <p key={idx} className="text-red-500 text-sm">
+                      {msg}
+                    </p>
+                  ))}
+                </div>
 
-  {/* Commodity Select */}
-  <div className="w-48 space-y-1.5">
-    <Label htmlFor="commodity">Commodity</Label>
-    <Select
-      value={formData.select_commodity}
-      onValueChange={(value) => handleInputChange('select_commodity', value)}
-    >
-      {renderSelectTrigger(formData.select_commodity, commodityIcons, "Select Commodity")}
-      <SelectContent>
-        {Object.entries(commodityIcons).map(([key, Icon]) => (
-          <SelectItem key={key} value={key}>
-            <div className="flex items-center gap-2">
-              <Icon className="w-4 h-4" />
-              {key}
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-    {errors.select_commodity?.map((msg, idx) => (
-                  <p key={idx} className="text-red-500 text-sm">
-                    {msg}
-                  </p>
-                ))}
-  </div>
+                {/* Commodity Select */}
+                <div className="w-48 space-y-1.5">
+                  <Label htmlFor="commodity">Commodity</Label>
+                  <Select
+                    value={formData.select_commodity}
+                    onValueChange={(value) => handleInputChange('select_commodity', value)}
+                  >
+                    {renderSelectTrigger(
+                      formData.select_commodity,
+                      commodityIcons,
+                      'Select Commodity',
+                    )}
+                    <SelectContent>
+                      {Object.entries(commodityIcons).map(([key, Icon]) => (
+                        <SelectItem key={key} value={key}>
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4" />
+                            {key}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.select_commodity?.map((msg, idx) => (
+                    <p key={idx} className="text-red-500 text-sm">
+                      {msg}
+                    </p>
+                  ))}
+                </div>
               </div>
 
               {/* Authors */}
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="authors">Authors</Label>
-                <Input 
+                <Input
                   id="authors"
                   value={formData.author_names}
                   onChange={(e) => handleInputChange('author_names', e.target.value)}
                 />
-                    {errors.authors?.map((msg, idx) => (
+                {errors.authors?.map((msg, idx) => (
                   <p key={idx} className="text-red-500 text-sm">
                     {msg}
                   </p>
@@ -311,7 +309,7 @@ export default function ModalEditRepository({
                   value={formData.description}
                   onChange={(e) => handleInputChange('description', e.target.value)}
                 />
-                    {errors.description?.map((msg, idx) => (
+                {errors.description?.map((msg, idx) => (
                   <p key={idx} className="text-red-500 text-sm">
                     {msg}
                   </p>
@@ -326,24 +324,26 @@ export default function ModalEditRepository({
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !formData.date_published && "text-muted-foreground"
+                        'w-[240px] pl-3 text-left font-normal',
+                        !formData.date_published && 'text-muted-foreground',
                       )}
                     >
-                      {formData.date_published ? 
-                        format(new Date(formData.date_published), "PPP") : 
-                        <span>Pick a date</span>}
+                      {formData.date_published ? (
+                        format(new Date(formData.date_published), 'PPP')
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                       mode="single"
-                      selected={formData.date_published ? new Date(formData.date_published) : undefined}
-                      onSelect={handleDateChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
+                      selected={
+                        formData.date_published ? new Date(formData.date_published) : undefined
                       }
+                      onSelect={handleDateChange}
+                      disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
                       initialFocus
                     />
                   </PopoverContent>
@@ -358,12 +358,12 @@ export default function ModalEditRepository({
               {/* Link */}
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="link">Link</Label>
-                <Input 
-                  id="link" 
+                <Input
+                  id="link"
                   value={formData.url_repository}
                   onChange={(e) => handleInputChange('url_repository', e.target.value)}
                 />
-                     {errors.url_repository?.map((msg, idx) => (
+                {errors.url_repository?.map((msg, idx) => (
                   <p key={idx} className="text-red-500 text-sm">
                     {msg}
                   </p>
@@ -373,7 +373,9 @@ export default function ModalEditRepository({
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
           <Button onClick={handleSubmit}>Save Changes</Button>
         </CardFooter>
       </Card>

@@ -1,6 +1,6 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -9,7 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
             <Link href="/home" className="flex items-center space-x-2">
-              <Image src="/logo-v2.png" alt="VCLAB Logo" width={120} height={40} className="h-10 w-auto" />
+              <Image
+                src="/logo-v2.png"
+                alt="VCLAB Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-gray-600 text-sm mt-4">
               Empowering communities through innovation for sustainable agri-aqua futures.
@@ -48,12 +54,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/news-and-events" className="text-gray-600 hover:text-green-600 text-sm">
+                <Link
+                  href="/news-and-events"
+                  className="text-gray-600 hover:text-green-600 text-sm"
+                >
                   News and Events
                 </Link>
               </li>
               <li>
-                <Link href="/published-papers" className="text-gray-600 hover:text-green-600 text-sm">
+                <Link
+                  href="/published-papers"
+                  className="text-gray-600 hover:text-green-600 text-sm"
+                >
                   Published Papers
                 </Link>
               </li>
@@ -70,7 +82,9 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-green-600 mr-2 mt-0.5" />
-                <span className="text-gray-600 text-sm">VCLAB Building, University Campus, Philippines</span>
+                <span className="text-gray-600 text-sm">
+                  VCLAB Building, University Campus, Philippines
+                </span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-green-600 mr-2" />
@@ -93,5 +107,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

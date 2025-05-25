@@ -1,9 +1,8 @@
-import { PartnershipAndLinkagesComponent } from "@/components/client/PartnershipAndLinkages"
+import { PartnershipAndLinkagesComponent } from '@/components/client/PartnershipAndLinkages';
 export default function PartnershipPage() {
-    return (
-      <div>
-       <PartnershipAndLinkagesComponent/>
-      </div>
-    )
-  }
-  
+  return (
+    <div>
+      <PartnershipAndLinkagesComponent />
+    </div>
+  );
+}

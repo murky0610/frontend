@@ -1,10 +1,9 @@
-import { AllUserScreen } from "@/components/auth/AllUserScreen"
+import { AllUserScreen } from '@/components/auth/AllUserScreen';
 
-export default function UserProfilePage () {
-
-  return(
+export default function UserProfilePage() {
+  return (
     <div>
-      <AllUserScreen/>
+      <AllUserScreen />
     </div>
-  )
+  );
 }

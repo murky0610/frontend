@@ -1,7 +1,7 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+'use client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -10,12 +10,12 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useState } from "react"
-import { userRegister } from "@/api/api"
-import { UserRegisterInterface, userRegisterSchema } from "@/schema/user-register.schema"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
+} from '@/components/ui/select';
+import { useState } from 'react';
+import { userRegister } from '@/api/api';
+import { UserRegisterInterface, userRegisterSchema } from '@/schema/user-register.schema';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export function SignUpForm() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export function SignUpForm() {
 
     // Password confirmation check
     if (password !== confirmPassword) {
-      setErrors({ confirmPassword: "Passwords do not match" });
+      setErrors({ confirmPassword: 'Passwords do not match' });
       return;
     }
 
@@ -71,15 +71,15 @@ export function SignUpForm() {
     // API call
     try {
       const response = await userRegister(userData);
-      if (response.status === 201){
+      if (response.status === 201) {
         // toast("User Registered Successfuly")
         setTimeout(() => {
-          router.push("/login");
+          router.push('/login');
         }, 2000);
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      setErrors({ general: "An error occurred while registering." });
+      console.error('Registration error:', error);
+      setErrors({ general: 'An error occurred while registering.' });
     }
   };
 
@@ -91,20 +91,20 @@ export function SignUpForm() {
           Create a new account by filling out the form below
         </p>
       </div>
-      
+
       {errors.general && <p className="text-red-500 text-center">{errors.general}</p>}
 
       <div className="grid gap-6">
         {/* Email Field */}
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input 
-            id="email" 
-            type="email" 
-            placeholder="m@example.com" 
-            required 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+          <Input
+            id="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
@@ -113,25 +113,25 @@ export function SignUpForm() {
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="firstName">First Name</Label>
-            <Input 
-              id="firstName" 
-              type="text" 
-              placeholder="John" 
-              required 
-              value={firstName} 
-              onChange={(e) => setFirstName(e.target.value)} 
+            <Input
+              id="firstName"
+              type="text"
+              placeholder="John"
+              required
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="lastName">Last Name</Label>
-            <Input 
-              id="lastName" 
-              type="text" 
-              placeholder="Doe" 
-              required 
-              value={lastName} 
-              onChange={(e) => setLastName(e.target.value)} 
+            <Input
+              id="lastName"
+              type="text"
+              placeholder="Doe"
+              required
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
             {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
           </div>
@@ -140,12 +140,12 @@ export function SignUpForm() {
         {/* Password Field */}
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input 
-            id="password" 
-            type="password" 
-            required 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+          <Input
+            id="password"
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
@@ -153,14 +153,16 @@ export function SignUpForm() {
         {/* Confirm Password Field */}
         <div className="grid gap-2">
           <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input 
-            id="confirmPassword" 
-            type="password" 
-            required 
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
+          <Input
+            id="confirmPassword"
+            type="password"
+            required
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+          )}
         </div>
 
         {/* Role Selection */}
@@ -181,17 +183,13 @@ export function SignUpForm() {
           {errors.role && <p className="text-red-500 text-sm">{errors.role}</p>}
         </div>
 
-        <Button 
-          type="submit" 
-          className="w-full"
-          onClick={handleRegister}
-        >
+        <Button type="submit" className="w-full" onClick={handleRegister}>
           Sign Up
         </Button>
       </div>
 
       <div className="text-center text-sm">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <Link href="/login" className="underline underline-offset-4">
           Login
         </Link>

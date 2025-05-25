@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Database, FolderTree } from "lucide-react"
-import Link from "next/link"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Database, FolderTree } from 'lucide-react';
+import Link from 'next/link';
 
 export default function KnowledgeManagementPage() {
   return (
@@ -19,9 +19,9 @@ export default function KnowledgeManagementPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Store, organize, and manage your documents, files, and digital resources in a structured environment.
-                The Repository provides version control, search capabilities, and secure access to your organization's
-                knowledge base.
+                Store, organize, and manage your documents, files, and digital resources in a
+                structured environment. The Repository provides version control, search
+                capabilities, and secure access to your organization's knowledge base.
               </p>
             </CardContent>
           </Card>
@@ -38,14 +38,14 @@ export default function KnowledgeManagementPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Explore your organization's structure, find experts, and locate resources through an intuitive directory
-                system. The Directory service helps connect people with the right information and subject matter experts
-                across your organization.
+                Explore your organization's structure, find experts, and locate resources through an
+                intuitive directory system. The Directory service helps connect people with the
+                right information and subject matter experts across your organization.
               </p>
             </CardContent>
           </Card>
         </Link>
       </div>
     </div>
-  )
+  );
 }

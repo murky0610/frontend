@@ -1,18 +1,31 @@
-"use client";
-import * as React from "react";
-import { useState, useEffect, useMemo } from "react";
-import Fuse from "fuse.js";
-import { displayMyRepositories } from "@/api/api";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Scale, BookOpen, GraduationCap, Boxes, HandCoins, Cpu, Coffee, Banana, Bean, UserRoundPen, SlidersHorizontal, ExternalLink } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import { RepositoryInterface } from "@/interface/repository.interface";
-import { Input } from "@/components/ui/input";
-import RepositoryFilterSearch from "../interaction-elements/RepositoryFilterSearch";
-import Link from "next/link";
+'use client';
+import * as React from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import Fuse from 'fuse.js';
+import { displayMyRepositories } from '@/api/api';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import {
+  Scale,
+  BookOpen,
+  GraduationCap,
+  Boxes,
+  HandCoins,
+  Cpu,
+  Coffee,
+  Banana,
+  Bean,
+  UserRoundPen,
+  SlidersHorizontal,
+  ExternalLink,
+} from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { RepositoryInterface } from '@/interface/repository.interface';
+import { Input } from '@/components/ui/input';
+import RepositoryFilterSearch from '../interaction-elements/RepositoryFilterSearch';
+import Link from 'next/link';
 import {
   Pagination,
   PaginationContent,
@@ -21,24 +34,24 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from '@/components/ui/pagination';
 
 const categoryIcons = {
-  "Policy Brief": Scale,
-  "Paper": BookOpen,
-  "Research Project": GraduationCap,
+  'Policy Brief': Scale,
+  Paper: BookOpen,
+  'Research Project': GraduationCap,
 };
 
 const focusIcons = {
-  "Clustering": Boxes,
-  "Value Adding": HandCoins,
-  "Technology": Cpu,
+  Clustering: Boxes,
+  'Value Adding': HandCoins,
+  Technology: Cpu,
 };
 
 const commodityIcons = {
-  "Cacao": Bean,
-  "Coffee": Coffee,
-  "Cavendish Banana": Banana,
+  Cacao: Bean,
+  Coffee: Coffee,
+  'Cavendish Banana': Banana,
 };
 
 function useDebounce<T>(value: T, delay: number): T {
@@ -72,7 +85,7 @@ export function DisplayRepositories() {
     focuses: [] as string[],
     commodities: [] as string[],
     startYear: '',
-    endYear: ''
+    endYear: '',
   });
 
   const fuse = useMemo(() => {
@@ -84,7 +97,7 @@ export function DisplayRepositories() {
         'author_names',
         'select_category',
         'select_focus',
-        'select_commodity'
+        'select_commodity',
       ],
       threshold: 0.3,
       minMatchCharLength: 2,
@@ -95,34 +108,43 @@ export function DisplayRepositories() {
 
   const filteredRepositories = useMemo(() => {
     let results = repositories;
-    
+
     if (debouncedSearchKeyword && fuse) {
-      results = fuse.search(debouncedSearchKeyword).map(result => result.item);
+      results = fuse.search(debouncedSearchKeyword).map((result) => result.item);
     }
 
-    return results.filter(repo => {
-      if (activeFilters.categories.length > 0 && 
-          !activeFilters.categories.includes(repo.select_category)) {
+    return results.filter((repo) => {
+      if (
+        activeFilters.categories.length > 0 &&
+        !activeFilters.categories.includes(repo.select_category)
+      ) {
         return false;
       }
 
-      if (activeFilters.focuses.length > 0 && 
-          !activeFilters.focuses.includes(repo.select_focus)) {
+      if (activeFilters.focuses.length > 0 && !activeFilters.focuses.includes(repo.select_focus)) {
         return false;
       }
 
-      if (activeFilters.commodities.length > 0 && 
-          !activeFilters.commodities.includes(repo.select_commodity)) {
+      if (
+        activeFilters.commodities.length > 0 &&
+        !activeFilters.commodities.includes(repo.select_commodity)
+      ) {
         return false;
       }
 
       const repoYear = new Date(repo.date_published).getFullYear();
-      if (activeFilters.startYear && activeFilters.startYear !== "any" && 
-          repoYear < parseInt(activeFilters.startYear)) {
+      if (
+        activeFilters.startYear &&
+        activeFilters.startYear !== 'any' &&
+        repoYear < parseInt(activeFilters.startYear)
+      ) {
         return false;
       }
-      if (activeFilters.endYear && activeFilters.endYear !== "any" && 
-          repoYear > parseInt(activeFilters.endYear)) {
+      if (
+        activeFilters.endYear &&
+        activeFilters.endYear !== 'any' &&
+        repoYear > parseInt(activeFilters.endYear)
+      ) {
         return false;
       }
 
@@ -143,15 +165,15 @@ export function DisplayRepositories() {
       const data = await displayMyRepositories();
       setRepositories(Array.isArray(data) ? data : []);
     } catch (err) {
-      console.error("Error fetching repositories:", err);
-      setError("Failed to load repositories.");
+      console.error('Error fetching repositories:', err);
+      setError('Failed to load repositories.');
     }
   };
 
   const toggleDescription = (repoId: string) => {
-    setExpandedDescriptions(prev => ({
+    setExpandedDescriptions((prev) => ({
       ...prev,
-      [repoId]: !prev[repoId]
+      [repoId]: !prev[repoId],
     }));
   };
 
@@ -166,10 +188,13 @@ export function DisplayRepositories() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
           {/* Banner */}
           <div className="p-4 rounded-xl bg-gradient-to-r from-[#f0f4ff] to-[#f9faff] border border-blue-100 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-800">Your Gateway to Insightful Repositories</h2>
+            <h2 className="text-lg font-semibold text-gray-800">
+              Your Gateway to Insightful Repositories
+            </h2>
             <p className="text-sm text-gray-600 mt-1">
-              Browse through a collection of research projects, policy briefs, and papers submitted by partner institutions. 
-              Use the filter or search tools to find specific topics or contributors.
+              Browse through a collection of research projects, policy briefs, and papers submitted
+              by partner institutions. Use the filter or search tools to find specific topics or
+              contributors.
             </p>
           </div>
 
@@ -199,15 +224,19 @@ export function DisplayRepositories() {
             {/* Cards Section */}
             <div className="grid grid-cols-1 gap-6 flex-1">
               {paginatedRepositories.map((repo) => {
-                const CategoryIcon = categoryIcons[repo.select_category as keyof typeof categoryIcons];
+                const CategoryIcon =
+                  categoryIcons[repo.select_category as keyof typeof categoryIcons];
                 const FocusIcon = focusIcons[repo.select_focus as keyof typeof focusIcons];
-                const CommodityIcon = commodityIcons[repo.select_commodity as keyof typeof commodityIcons];
+                const CommodityIcon =
+                  commodityIcons[repo.select_commodity as keyof typeof commodityIcons];
                 const isExpanded = expandedDescriptions[repo.id] || false;
 
                 return (
                   <Card key={repo.id} className="shadow-md bg-white p-4">
                     <CardHeader>
-                      <CardTitle><p className="text-4xl">{repo.title}</p></CardTitle>
+                      <CardTitle>
+                        <p className="text-4xl">{repo.title}</p>
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <Label className="text-gray-600">Published on: {repo.date_published}</Label>
@@ -236,25 +265,31 @@ export function DisplayRepositories() {
                     <CardContent>
                       <div className="mt-5">
                         <p className="text-[#3b3d42] text-lg font-sans tracking-normal">
-                          {isExpanded ? repo.description : `${repo.description.substring(0, 150)}...`}
+                          {isExpanded
+                            ? repo.description
+                            : `${repo.description.substring(0, 150)}...`}
                         </p>
                         {repo.description.length > 150 && (
                           <button
                             onClick={() => toggleDescription(repo.id.toString())}
                             className="text-blue-600 hover:underline text-sm mt-1"
                           >
-                            {isExpanded ? "[See Less]" : "[See More]"}
+                            {isExpanded ? '[See Less]' : '[See More]'}
                           </button>
                         )}
                       </div>
                     </CardContent>
                     <CardContent>
-                 
-                    <Button asChild variant="outline" className="w-full sm:w-auto">
-                           <Link href={repo.url_repository} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                                          View Full Details <ExternalLink className="ml-2 h-4 w-4" />
-                                        </Link>
-                </Button>
+                      <Button asChild variant="outline" className="w-full sm:w-auto">
+                        <Link
+                          href={repo.url_repository}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center"
+                        >
+                          View Full Details <ExternalLink className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
                     </CardContent>
                   </Card>
                 );
@@ -263,14 +298,11 @@ export function DisplayRepositories() {
 
             {/* Filter Sidebar */}
             <div className="w-full md:w-72 p-2">
-              <RepositoryFilterSearch
-                open={open}
-                onApplyFilters={setActiveFilters}
-              />
+              <RepositoryFilterSearch open={open} onApplyFilters={setActiveFilters} />
             </div>
           </div>
         )}
-        
+
         {totalPages > 0 && (
           <Pagination>
             <PaginationContent>
@@ -281,7 +313,7 @@ export function DisplayRepositories() {
                     e.preventDefault();
                     if (currentPage > 1) setCurrentPage(currentPage - 1);
                   }}
-                  className={currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}
+                  className={currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}
                 />
               </PaginationItem>
               {Array.from({ length: totalPages }, (_, i) => (
@@ -305,7 +337,7 @@ export function DisplayRepositories() {
                     e.preventDefault();
                     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
                   }}
-                  className={currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}
+                  className={currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}
                 />
               </PaginationItem>
             </PaginationContent>

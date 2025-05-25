@@ -1,53 +1,55 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Facebook, Mail, MapPin, Send } from "lucide-react"
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Facebook, Mail, MapPin, Send } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
 
-import { toast } from "sonner"
+import { toast } from 'sonner';
 
 export function ContactUsSection() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+    name: '',
+    email: '',
+    message: '',
+  });
 
-  const email = "aavclab.upmindanao@up.edu.ph"
-  const facebookUrl = "https://web.facebook.com/AAVCLab"
-  const location = "UP Mindanao, Tugbok, Davao City, 8000 Davao del Sur"
-  const mapUrl = "https://maps.app.goo.gl/DCRybnhQom2ybXeWA"
+  const email = 'aavclab.upmindanao@up.edu.ph';
+  const facebookUrl = 'https://web.facebook.com/AAVCLab';
+  const location = 'UP Mindanao, Tugbok, Davao City, 8000 Davao del Sur';
+  const mapUrl = 'https://maps.app.goo.gl/DCRybnhQom2ybXeWA';
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send the form data to your backend
-    toast.success( "Message sent! We'll get back to you as soon as possible.")
-    setFormData({ name: "", email: "", message: "" })
-  }
+    toast.success("Message sent! We'll get back to you as soon as possible.");
+    setFormData({ name: '', email: '', message: '' });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <section className="py-12 px-4 md:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Connect With Us</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Connect With Us
+          </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-            We're eager to hear from you! Whether you're interested in collaborations, have inquiries, or wish to learn
-            more about our work.
+            We're eager to hear from you! Whether you're interested in collaborations, have
+            inquiries, or wish to learn more about our work.
           </p>
         </div>
 
@@ -56,7 +58,9 @@ export function ContactUsSection() {
           <Card className="shadow-lg border-gray-200 h-full">
             <CardHeader>
               <CardTitle className="text-2xl">Send Us a Message</CardTitle>
-              <CardDescription>Fill out the form below and we'll get back to you soon.</CardDescription>
+              <CardDescription>
+                Fill out the form below and we'll get back to you soon.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -117,7 +121,7 @@ export function ContactUsSection() {
               </div>
               <CardTitle className="text-2xl">AAVCLab</CardTitle>
               <CardDescription className="text-base max-w-md">
-              Agri Aqua Value Chain Laboratory at UP Mindanao
+                Agri Aqua Value Chain Laboratory at UP Mindanao
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -143,7 +147,10 @@ export function ContactUsSection() {
                   <Mail className="h-5 w-5 text-green-600 mt-1 flex-shrink-0" />
                   <div className="ml-3">
                     <h4 className="font-medium text-gray-900">Email</h4>
-                    <Link href={`mailto:${email}`} className="text-gray-600 hover:text-green-600 transition-colors">
+                    <Link
+                      href={`mailto:${email}`}
+                      className="text-gray-600 hover:text-green-600 transition-colors"
+                    >
                       {email}
                     </Link>
                   </div>
@@ -171,5 +178,5 @@ export function ContactUsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

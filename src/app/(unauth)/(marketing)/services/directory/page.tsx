@@ -1,238 +1,238 @@
-"use client"
-import { useEffect, useRef, useState } from "react"
-import type React from "react"
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import type React from 'react';
 
-import L from "leaflet"
-import "leaflet/dist/leaflet.css"
-import type * as GeoJSON from "geojson"
-import { X } from "lucide-react"
-import { provinceData } from "./geojson-data"
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import type * as GeoJSON from 'geojson';
+import { X } from 'lucide-react';
+import { provinceData } from './geojson-data';
 // Interfaces as defined by the user
 export interface DirectoryInterface {
-  provinceName: string
-  commodities: string[]
+  provinceName: string;
+  commodities: string[];
   entities: {
-    commodityName: string
-    ownerName: CommoditiesOwnersInterface
-  }[]
+    commodityName: string;
+    ownerName: CommoditiesOwnersInterface;
+  }[];
 }
 
 export interface CommoditiesOwnersInterface {
-  ownerName: string
-  information: OwnersInformationInterface
+  ownerName: string;
+  information: OwnersInformationInterface;
 }
 
 export interface OwnersInformationInterface {
-  coordinate: CoordinatesInterface
-  email?: string
-  phoneNumber?: number
-  website?: string
-  facebook?: string
-  instagram?: string
-  shopee?: string
-  lazada?: string
+  coordinate: CoordinatesInterface;
+  email?: string;
+  phoneNumber?: number;
+  website?: string;
+  facebook?: string;
+  instagram?: string;
+  shopee?: string;
+  lazada?: string;
 }
 
 export interface CoordinatesInterface {
-  longitude: number
-  latitude: number
+  longitude: number;
+  latitude: number;
 }
 
 // Define custom layer type that includes feature property
 interface GeoJSONLayer extends L.Layer {
-  feature: GeoJSON.Feature<GeoJSON.Geometry, { name: string }>
+  feature: GeoJSON.Feature<GeoJSON.Geometry, { name: string }>;
 }
 
 const MindanaoMap: React.FC = () => {
-  const mapRef = useRef<L.Map | null>(null)
-  const geoJsonRef = useRef<L.GeoJSON | null>(null)
-  const [selectedProvince, setSelectedProvince] = useState<DirectoryInterface | null>(null)
-  const mapContainerRef = useRef<HTMLDivElement>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const mapRef = useRef<L.Map | null>(null);
+  const geoJsonRef = useRef<L.GeoJSON | null>(null);
+  const [selectedProvince, setSelectedProvince] = useState<DirectoryInterface | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Sample directory data using the defined interfaces
   const provinceDirectories: Record<string, DirectoryInterface> = {
-    "Davao del Norte": {
-      provinceName: "Davao del Norte",
-      commodities: ["Banana Saba", "Cacao", "Coconut"],
+    'Davao del Norte': {
+      provinceName: 'Davao del Norte',
+      commodities: ['Banana Saba', 'Cacao', 'Coconut'],
       entities: [
         {
-          commodityName: "Banana Saba",
+          commodityName: 'Banana Saba',
           ownerName: {
-            ownerName: "Cale88 Foods Corporation",
+            ownerName: 'Cale88 Foods Corporation',
             information: {
               coordinate: { longitude: 125.5, latitude: 7.5 },
-              email: "cale88@example.com",
+              email: 'cale88@example.com',
               phoneNumber: 9123456789,
-              website: "https://cale88.example.com",
+              website: 'https://cale88.example.com',
             },
           },
         },
         {
-          commodityName: "Banana Saba",
+          commodityName: 'Banana Saba',
           ownerName: {
-            ownerName: "Jef Banana Chips",
+            ownerName: 'Jef Banana Chips',
             information: {
               coordinate: { longitude: 125.4, latitude: 7.4 },
               phoneNumber: 9234567890,
-              facebook: "jefbananachips",
+              facebook: 'jefbananachips',
             },
           },
         },
         {
-          commodityName: "Cacao",
+          commodityName: 'Cacao',
           ownerName: {
-            ownerName: "Chokolate de San Isidro (CSI)",
+            ownerName: 'Chokolate de San Isidro (CSI)',
             information: {
               coordinate: { longitude: 125.6, latitude: 7.6 },
-              email: "csi@example.com",
-              website: "https://csi.example.com",
+              email: 'csi@example.com',
+              website: 'https://csi.example.com',
             },
           },
         },
         {
-          commodityName: "Cacao",
+          commodityName: 'Cacao',
           ownerName: {
-            ownerName: "Chocoloco, Inc.",
+            ownerName: 'Chocoloco, Inc.',
             information: {
               coordinate: { longitude: 125.55, latitude: 7.55 },
-              instagram: "chocoloco_inc",
+              instagram: 'chocoloco_inc',
             },
           },
         },
         {
-          commodityName: "Coconut",
+          commodityName: 'Coconut',
           ownerName: {
             ownerName: "Raymundo's Homemade Products",
             information: {
               coordinate: { longitude: 125.45, latitude: 7.45 },
-              shopee: "raymundohomemade",
-              lazada: "raymundohomemade",
+              shopee: 'raymundohomemade',
+              lazada: 'raymundohomemade',
             },
           },
         },
       ],
     },
-    "Davao de Oro": {
-      provinceName: "Davao de Oro",
-      commodities: ["Cacao", "Corn", "Guyabano", "Mangosteen", "Turmeric"],
+    'Davao de Oro': {
+      provinceName: 'Davao de Oro',
+      commodities: ['Cacao', 'Corn', 'Guyabano', 'Mangosteen', 'Turmeric'],
       entities: [
         {
-          commodityName: "Banana Saba",
+          commodityName: 'Banana Saba',
           ownerName: {
-            ownerName: "Cale88 Foods Corporation",
+            ownerName: 'Cale88 Foods Corporation',
             information: {
               coordinate: { longitude: 125.5, latitude: 7.5 },
-              email: "cale88@example.com",
+              email: 'cale88@example.com',
               phoneNumber: 9123456789,
-              website: "https://cale88.example.com",
+              website: 'https://cale88.example.com',
             },
           },
         },
         {
-          commodityName: "Banana Saba",
+          commodityName: 'Banana Saba',
           ownerName: {
-            ownerName: "Jef Banana Chips",
+            ownerName: 'Jef Banana Chips',
             information: {
               coordinate: { longitude: 125.4, latitude: 7.4 },
               phoneNumber: 9234567890,
-              facebook: "jefbananachips",
+              facebook: 'jefbananachips',
             },
           },
         },
         {
-          commodityName: "Cacao",
+          commodityName: 'Cacao',
           ownerName: {
-            ownerName: "Chokolate de San Isidro (CSI)",
+            ownerName: 'Chokolate de San Isidro (CSI)',
             information: {
               coordinate: { longitude: 125.6, latitude: 7.6 },
-              email: "csi@example.com",
-              website: "https://csi.example.com",
+              email: 'csi@example.com',
+              website: 'https://csi.example.com',
             },
           },
         },
         {
-          commodityName: "Cacao",
+          commodityName: 'Cacao',
           ownerName: {
-            ownerName: "Chocoloco, Inc.",
+            ownerName: 'Chocoloco, Inc.',
             information: {
               coordinate: { longitude: 125.55, latitude: 7.55 },
-              instagram: "chocoloco_inc",
+              instagram: 'chocoloco_inc',
             },
           },
         },
         {
-          commodityName: "Coconut",
+          commodityName: 'Coconut',
           ownerName: {
             ownerName: "Raymundo's Homemade Products",
             information: {
               coordinate: { longitude: 125.45, latitude: 7.45 },
-              shopee: "raymundohomemade",
-              lazada: "raymundohomemade",
+              shopee: 'raymundohomemade',
+              lazada: 'raymundohomemade',
             },
           },
         },
       ],
     },
-  }
+  };
 
   useEffect(() => {
-    if (!mapContainerRef.current) return
+    if (!mapContainerRef.current) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     // Initialize map
-    const map = L.map(mapContainerRef.current).setView([7.8, 125.0], 7)
-    mapRef.current = map
+    const map = L.map(mapContainerRef.current).setView([7.8, 125.0], 7);
+    mapRef.current = map;
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors",
-    }).addTo(map)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
 
     // Style function
     const styleFeature = (): L.PathOptions => ({
-      fillColor: "#FEB24C",
+      fillColor: '#FEB24C',
       weight: 2,
       opacity: 1,
-      color: "white",
-      dashArray: "3",
+      color: 'white',
+      dashArray: '3',
       fillOpacity: 0.7,
-    })
+    });
 
     // Highlight functions
     const highlightFeature = (e: L.LeafletEvent) => {
-      const layer = e.target as L.Path
+      const layer = e.target as L.Path;
       layer.setStyle({
         weight: 5,
-        color: "#666",
-        dashArray: "",
+        color: '#666',
+        dashArray: '',
         fillOpacity: 0.7,
-      })
-      layer.bringToFront()
-    }
+      });
+      layer.bringToFront();
+    };
 
     const resetHighlight = (e: L.LeafletEvent) => {
       if (e.target !== geoJsonRef.current?.getLayers()[0]) {
-        geoJsonRef.current?.resetStyle(e.target)
+        geoJsonRef.current?.resetStyle(e.target);
       }
-    }
+    };
 
     // Updated click handler with proper typing
     const onFeatureClick = (e: L.LeafletEvent) => {
-      const layer = e.target as GeoJSONLayer & L.Polygon
+      const layer = e.target as GeoJSONLayer & L.Polygon;
       if (mapRef.current) {
-        mapRef.current.fitBounds(layer.getBounds())
+        mapRef.current.fitBounds(layer.getBounds());
       }
 
-      const provinceName = layer.feature.properties.name
-      const provinceDirectory = provinceDirectories[provinceName]
+      const provinceName = layer.feature.properties.name;
+      const provinceDirectory = provinceDirectories[provinceName];
 
       if (provinceDirectory) {
-        setSelectedProvince(provinceDirectory)
+        setSelectedProvince(provinceDirectory);
       } else {
-        setSelectedProvince(null)
+        setSelectedProvince(null);
       }
-    }
+    };
 
     // Create GeoJSON layer
     const geoJson = L.geoJSON(provinceData, {
@@ -242,38 +242,38 @@ const MindanaoMap: React.FC = () => {
           mouseover: highlightFeature,
           mouseout: resetHighlight,
           click: onFeatureClick,
-        })
+        });
       },
-    }).addTo(map)
+    }).addTo(map);
 
-    geoJsonRef.current = geoJson
-    setIsLoading(false)
+    geoJsonRef.current = geoJson;
+    setIsLoading(false);
 
     // Cleanup
     return () => {
-      map.remove()
-    }
-  }, [])
+      map.remove();
+    };
+  }, []);
 
   // Group entities by commodity for display
-  const groupEntitiesByCommodity = (entities: DirectoryInterface["entities"]) => {
-    const grouped: Record<string, string[]> = {}
+  const groupEntitiesByCommodity = (entities: DirectoryInterface['entities']) => {
+    const grouped: Record<string, string[]> = {};
 
     entities.forEach((entity) => {
       if (!grouped[entity.commodityName]) {
-        grouped[entity.commodityName] = []
+        grouped[entity.commodityName] = [];
       }
-      grouped[entity.commodityName].push(entity.ownerName.ownerName)
-    })
+      grouped[entity.commodityName].push(entity.ownerName.ownerName);
+    });
 
-    return grouped
-  }
+    return grouped;
+  };
 
   const renderInfoContent = () => {
-    if (!selectedProvince) return "Click on a province to see details."
+    if (!selectedProvince) return 'Click on a province to see details.';
 
-    const { provinceName, commodities, entities } = selectedProvince
-    const groupedEntities = groupEntitiesByCommodity(entities)
+    const { provinceName, commodities, entities } = selectedProvince;
+    const groupedEntities = groupEntitiesByCommodity(entities);
 
     return (
       <>
@@ -301,7 +301,10 @@ const MindanaoMap: React.FC = () => {
               {owners.length > 0 ? (
                 <ul className="space-y-2">
                   {owners.map((owner, index) => (
-                    <li key={index} className="p-2 bg-gray-50 rounded hover:bg-gray-100 transition-colors">
+                    <li
+                      key={index}
+                      className="p-2 bg-gray-50 rounded hover:bg-gray-100 transition-colors"
+                    >
                       {owner}
                     </li>
                   ))}
@@ -313,12 +316,12 @@ const MindanaoMap: React.FC = () => {
           ))}
         </div>
       </>
-    )
-  }
+    );
+  };
 
   // Render owner details when clicked (could be expanded in future)
   const renderOwnerDetails = (owner: CommoditiesOwnersInterface) => {
-    const { ownerName, information } = owner
+    const { ownerName, information } = owner;
     return (
       <div className="mt-2 p-3 bg-gray-50 rounded">
         <h6 className="font-semibold">{ownerName}</h6>
@@ -333,8 +336,8 @@ const MindanaoMap: React.FC = () => {
           Location: {information.coordinate.latitude}, {information.coordinate.longitude}
         </p>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="relative w-full h-[90vh] flex flex-col md:flex-row">
@@ -391,7 +394,7 @@ const MindanaoMap: React.FC = () => {
       )}
       <div ref={mapContainerRef} className="flex-1 h-full" />
     </div>
-  )
-}
+  );
+};
 
-export default MindanaoMap
+export default MindanaoMap;

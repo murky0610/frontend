@@ -5,7 +5,6 @@
 //   const data = JSON.parse(file);
 //   // Extract the names of all regions
 
-  
 //   const regionNames = data.features.map((feature: string) => feature.properties.name);
 //   return (
 //     <div>
