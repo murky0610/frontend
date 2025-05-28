@@ -188,11 +188,11 @@ export default function NavigationMenuDemo() {
               Knowledge Management
             </Link>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          {/* <NavigationMenuItem>
             <Link href="/complement-projects" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
               Complementary Projects
             </Link>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
           <NavigationMenuItem>
             <Link href="/contact-us" className="px-1 py-1.5 hover:text-emerald-700 transition-colors">
               Contact Us
