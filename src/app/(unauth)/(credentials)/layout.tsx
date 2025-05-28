@@ -1,4 +1,4 @@
-
+import { Toaster } from "@/components/ui/sonner";
 export default function CredentialLayout({
   children,
 }: Readonly<{
@@ -8,6 +8,7 @@ export default function CredentialLayout({
   <div>
      
         {children}
+         <Toaster/>
     </div>
   );
 }

@@ -1,27 +1,36 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { userLogin } from "@/api/api";
-import Link from "next/link";
-
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { userLogin } from '@/api/api';
+import Link from 'next/link';
+import { toast } from 'sonner';
 export function LoginForm() {
-
   const [email, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter(); 
-
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const handleLogin = async () => {
+    setLoading(true);
+
+    try {
       const response = await userLogin(email, password);
       if (response === true) {
-          router.push('/dashboard'); 
+        toast.success('Sucess login');
+        router.push('/dashboard');
+      } else {
+        console.log('Wrong email or password');
+        toast.error('Wrong email or password');
       }
-
-
+    } catch (error) {
+      console.error('An error occurred during login.', error);
+    } finally {
+      setLoading(false); // Re-enable the button
+    }
   };
   return (
-      <div>
+    <div>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-balance text-sm text-muted-foreground">
@@ -31,23 +40,32 @@ export function LoginForm() {
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required onChange={(e) => setUserEmail(e.target.value)} value={email}/>
+          <Input
+            id="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+            onChange={(e) => setUserEmail(e.target.value)}
+            value={email}
+          />
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
             <Label htmlFor="password">Password</Label>
-            <Link
-              href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
-            >
+            <Link href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
               Forgot your password?
             </Link>
           </div>
-          <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value)} value={password} />
+          <Input
+            id="password"
+            type="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
         </div>
-        <Button type="submit" className="w-full"
-         onClick={handleLogin}>
-          Login
+        <Button type="submit" className="w-full" onClick={handleLogin} disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
         </Button>
         {/* <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
@@ -75,11 +93,11 @@ export function LoginForm() {
       </div>
       <br></br>
       <div className="text-center text-sm">
-        Don&apos;t have an account?{" "}
+        Don&apos;t have an account?{' '}
         <Link href="/register" className="underline underline-offset-4">
           Sign up
         </Link>
       </div>
-      </div>
-  )
+    </div>
+  );
 }
