@@ -435,7 +435,10 @@ const handleProvinceFilterChange = (province: string, checked: boolean) => {
         return <p className="text-sm text-gray-600">Select a province on the map or use filters to find businesses.</p>;
     };
 
-
+const mapKey = useMemo(() => 
+  `${JSON.stringify(posix)}-${zoom}`, 
+  [posix, zoom]
+);
     return (
         <div className="flex" style={{ width: "100%", height: "calc(100vh - 70px)" /* Adjust based on your navbar */ }}>
             {/* Sidebar */}
@@ -525,13 +528,13 @@ const handleProvinceFilterChange = (province: string, checked: boolean) => {
             <div className="w-2/3 lg:w-3/4" style={{ position: "relative" }}>
                 {isLoading && <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1001, background: 'rgba(255,255,255,0.8)', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.2)' }}>Loading directory data...</p>}
                 {error && <p style={{ position: 'absolute', top: 10, left: 10, zIndex: 1001, background: 'rgba(255,0,0,0.7)', color: 'white', padding: '10px', borderRadius: '5px' }}>Error: {error}</p>}
-
-                <MapContainer
-                    center={posix}
-                    zoom={zoom}
-                    style={{ height: "100%", width: "100%" }}
-                    whenCreated={setMapInstance} // Use renamed state setter
-                >
+<MapContainer
+  key={mapKey} // Add this line
+  center={posix}
+  zoom={zoom}
+  style={{ height: "100%", width: "100%" }}
+  whenCreated={setMapInstance}
+>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
