@@ -28,7 +28,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 // UI/UX MOD: Added Loader2, MapPin, Search icons. Removed EqualApproximatelyIcon as it's unused.
-import { Globe, Mail, Phone, Search, MapPin, Loader2 } from 'lucide-react';
+import { Globe, Mail, Phone, Search, MapPin, Loader2, Facebook, Instagram } from 'lucide-react';
 
 interface MapProps {
   posix: LatLngExpression | LatLngTuple;
@@ -460,16 +460,22 @@ const ComplementaryProjects = (propsMap: MapProps) => {
               </div>
             )}
             {selectedOwner.number && (
-              <div className="flex items-start space-x-2">
-                <Phone className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
-                <div>
-                  <span className="font-medium text-gray-500 block">Phone</span>
-                  <a href={`tel:${selectedOwner.number}`} className="text-blue-600 hover:underline">
-                    {selectedOwner.number}
-                  </a>
-                </div>
-              </div>
-            )}
+                  <div className="flex items-start space-x-2">
+                    <Phone className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
+                    <div>
+                      <span className="font-medium text-gray-500 block">Phone</span>
+                     {selectedOwner.number
+                      .split(/;/) // Split by semicolon
+                      .map((num, index) => (
+                        <div key={index}>
+                          <a href={`tel:${num.trim()}`} className="text-blue-600 hover:underline">
+                            {num.trim()}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
             {selectedOwner.website && (
               <div className="flex items-start space-x-2">
                 <Globe className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
@@ -490,7 +496,46 @@ const ComplementaryProjects = (propsMap: MapProps) => {
                 </div>
               </div>
             )}
-            {/* Data consistency note: API provides 'emai' sometimes. Ideally, this should be 'email'. */}
+ {selectedOwner.facebook && (
+              <div className="flex items-start space-x-2">
+                <Facebook className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
+                <div>
+                  <span className="font-medium text-gray-500 block">Facebook Page</span>
+                  <a
+                    href={
+                      !String(selectedOwner.facebook).startsWith('http')
+                        ? `http://${selectedOwner.facebook}`
+                        : String(selectedOwner.facebook)
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline break-all"
+                  >
+                    {selectedOwner.facebook}
+                  </a>
+                </div>
+              </div>
+            )}
+             {selectedOwner.instagram && (
+              <div className="flex items-start space-x-2">
+                <Instagram className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
+                <div>
+                  <span className="font-medium text-gray-500 block">Instagram Page</span>
+                  <a
+                    href={
+                      !String(selectedOwner.instagram).startsWith('http')
+                        ? `http://${selectedOwner.instagram}`
+                        : String(selectedOwner.instagram)
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline break-all"
+                  >
+                    {selectedOwner.instagram}
+                  </a>
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
       );
