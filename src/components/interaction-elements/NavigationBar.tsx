@@ -55,7 +55,7 @@ const components = [
 const services = [
   {
     title: "Mobile App",
-    href: "/services/mobile-app", // Example parent link for the overall Mobile App section
+    href: "/services/mobile-apps", // Example parent link for the overall Mobile App section
   },
   {title: "Research and Development", href: "/services/research-development"},
   { title: "Capacity Building", href: "/services/capacity-building" },  
