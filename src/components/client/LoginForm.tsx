@@ -64,7 +64,7 @@ export function LoginForm() {
             value={password}
           />
         </div>
-        <Button type="submit" className="w-full" onClick={handleLogin} disabled={loading}>
+        <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={handleLogin} disabled={loading}>
           {loading ? 'Logging in...' : 'Login'}
         </Button>
         {/* <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
